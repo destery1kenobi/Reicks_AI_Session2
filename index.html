@@ -1,0 +1,1603 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173128">
+  <meta name="description" content="Session 2 of Reicks View Farms AI 101. Practice everyday work with Google Gemini.">
+  <title>AI at Reicks · Session 2</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+:root{--deep:#173128;--forest:#29483a;--earth:#824326;--tan:#d8c8ad;--cream:#f4f1e9;--ink:#282a28;--white:#fff;--mint:#dce9dd;--line:rgba(41,72,58,.18);--shadow:0 24px 75px rgba(17,42,32,.18)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--deep);color:var(--ink)}body{font-family:'DM Sans',Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #b66a3d;outline-offset:3px}button:disabled{opacity:.38;cursor:default}.app-shell{width:100%;height:100dvh;display:grid;grid-template-rows:72px 4px minmax(0,1fr) 58px;overflow:hidden}.topbar,.footerbar{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,3vw,55px);background:var(--deep);color:var(--white);z-index:10}.topbar{border-bottom:1px solid rgba(255,255,255,.12)}.brand{display:flex;gap:14px;align-items:center;padding:0;border:0;color:var(--white);background:none;text-align:left;font-family:Montserrat,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.11em}.brand em{display:block;font-style:normal;color:var(--tan);font-size:11px;letter-spacing:.2em;margin-top:2px}.brand-mark{width:43px;height:38px;border:2px solid var(--tan);border-radius:50% 50% 3px 3px;display:flex;align-items:end;justify-content:center;gap:4px;overflow:hidden}.brand-mark i{display:block;height:10px;width:5px;background:var(--tan);transform:rotate(18deg);transform-origin:bottom}.brand-mark i:nth-child(2){height:17px}.brand-mark i:nth-child(3){height:25px}.topbar-center{display:flex;align-items:center;gap:13px;color:#d7e1d8;font-size:11px;font-weight:700;letter-spacing:.16em}.topbar-divider{height:15px;width:1px;background:#748c7c}.topbar-actions{display:flex;gap:18px}.text-button{background:none;border:0;color:var(--white);font-size:13px;font-weight:700;padding:8px}.text-button:hover{color:var(--tan)}.progress-track{background:#3a5748}.progress-track>div{height:100%;width:0;background:#d7ad74;transition:width .45s ease}#stage{position:relative;min-height:0;overflow-y:auto;overflow-x:hidden;background:var(--cream)}.slide{min-height:calc(100dvh - 134px);padding:clamp(28px,5vw,82px) clamp(28px,7vw,112px);position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:center;animation:slideIn .42s cubic-bezier(.16,1,.3,1) both}.slide::before{content:'';position:absolute;right:-110px;top:-160px;width:430px;height:430px;border-radius:50%;border:1px solid var(--line);box-shadow:0 0 0 70px rgba(41,72,58,.035),0 0 0 140px rgba(41,72,58,.025);z-index:-1;pointer-events:none}.slide::after{content:'';position:absolute;right:6%;bottom:9%;width:160px;height:42px;background:repeating-linear-gradient(120deg,transparent 0 13px,rgba(130,67,38,.14) 13px 16px);opacity:.8;z-index:-1;pointer-events:none}.slide.dark{background:var(--deep);color:var(--white)}.slide.dark::before{border-color:rgba(255,255,255,.13);box-shadow:0 0 0 75px rgba(255,255,255,.03),0 0 0 150px rgba(255,255,255,.025)}.slide.dark::after{background:repeating-linear-gradient(120deg,transparent 0 13px,rgba(216,200,173,.22) 13px 16px)}.chapter-label{font-size:12px;text-transform:uppercase;letter-spacing:.23em;font-weight:800;color:var(--earth);margin:0 0 22px}.dark .chapter-label{color:var(--tan)}h1,h2,h3,p{margin-top:0}h1,h2{font-family:Montserrat,Arial,sans-serif;letter-spacing:-.05em;line-height:1.07}h1{font-size:clamp(58px,8.5vw,132px);max-width:950px;margin-bottom:28px}h2{font-size:clamp(42px,5.25vw,79px);max-width:1040px;margin-bottom:32px}.lead{font-size:clamp(21px,2.35vw,34px);line-height:1.35;max-width:940px;color:var(--forest)}.dark .lead{color:#dce9dd}.small-copy{font-size:clamp(16px,1.35vw,20px);line-height:1.6;max-width:940px;color:#526056}.dark .small-copy{color:#c4d4c8}.hero-rule{width:100px;height:7px;background:var(--earth);margin:9px 0 30px}.dark .hero-rule{background:var(--tan)}.eyebrow-number{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:clamp(110px,24vw,320px);line-height:.8;letter-spacing:-.1em;color:rgba(216,200,173,.12);position:absolute;right:8%;bottom:4%;z-index:-1}.cover .lead{max-width:680px}.cover .subline{margin-top:48px;font-size:15px;letter-spacing:.08em;color:var(--tan);font-weight:700}.cover .field-art{position:absolute;right:8%;top:18%;width:min(32vw,420px);height:min(32vw,420px);border-radius:50%;border:1px solid rgba(216,200,173,.28);background:radial-gradient(circle at 50% 50%,rgba(216,200,173,.13) 0 12%,transparent 13%),repeating-radial-gradient(circle at 50% 50%,transparent 0 25px,rgba(216,200,173,.18) 26px 27px,transparent 28px 55px);animation:orbit 22s linear infinite}.cover .field-art::after{content:'';position:absolute;inset:22%;border:1px solid rgba(216,200,173,.3);border-radius:50%;transform:rotate(30deg)}.agenda{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 60px;max-width:1040px}.agenda-item{border-top:1px solid var(--line);padding:16px 0;display:flex;gap:22px;align-items:baseline}.agenda-item b{font-family:Montserrat,Arial,sans-serif;color:var(--earth);font-size:18px}.agenda-item span{font-size:24px;font-weight:600}.large-question{font-family:Montserrat,Arial,sans-serif;font-size:clamp(40px,6vw,86px);line-height:1.13;letter-spacing:-.055em;max-width:1050px;color:var(--deep);font-weight:700}.dark .large-question{color:var(--white)}.question-sub{border-left:5px solid var(--earth);padding-left:22px;margin-top:30px;font-size:23px;max-width:760px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,92px);max-width:1110px;margin-top:20px}.col{border-top:4px solid var(--tan);padding-top:20px}.col:nth-child(2){border-color:var(--forest)}.col h3{font-family:Montserrat,Arial,sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.06em;color:var(--earth);margin-bottom:26px}.col:nth-child(2) h3{color:var(--forest)}.col p,.col li{font-size:clamp(20px,2.1vw,29px);line-height:1.45}.point-list{list-style:none;padding:0;margin:0;max-width:1000px}.point-list li{display:flex;gap:22px;align-items:flex-start;font-size:clamp(22px,2.4vw,34px);line-height:1.35;margin:0 0 25px}.point-list li::before{content:'';width:12px;height:12px;flex:none;background:var(--earth);margin-top:15px;transform:rotate(45deg)}.statement{font-family:Montserrat,Arial,sans-serif;font-size:clamp(38px,5vw,70px);line-height:1.16;letter-spacing:-.05em;font-weight:700;max-width:1080px;color:var(--deep)}.dark .statement{color:var(--white)}.statement-sub{font-size:clamp(19px,2vw,29px);max-width:900px;margin-top:33px;line-height:1.5}.prompt-surface{background:var(--white);border-left:11px solid var(--forest);padding:clamp(22px,3vw,44px);box-shadow:var(--shadow);max-width:1030px;font-size:clamp(21px,2vw,29px);line-height:1.5;white-space:pre-wrap}.prompt-label{font-size:12px;letter-spacing:.2em;font-weight:800;color:var(--earth);margin:0 0 16px}.prompt-caption{font-size:18px;color:var(--forest);font-weight:700;margin-top:22px}.live-pill{display:inline-block;background:var(--earth);color:var(--white);padding:8px 12px;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}.step-rail{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 35px}.step-rail button,.choice-row button,.tab-row button,.action-button,.chip-button{border:1px solid var(--forest);background:transparent;color:var(--forest);padding:11px 16px;font-size:15px;font-weight:800}.step-rail button.active,.choice-row button.active,.tab-row button.active,.action-button{background:var(--forest);color:var(--white)}.step-rail button:hover,.choice-row button:hover,.tab-row button:hover,.action-button:hover,.chip-button:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(41,72,58,.16)}.interactive-body{max-width:1040px;min-height:185px;border-top:2px solid var(--forest);padding-top:26px}.interactive-body strong{display:block;font-family:Montserrat,Arial,sans-serif;font-size:clamp(26px,3vw,41px);color:var(--deep);margin-bottom:15px}.interactive-body p{font-size:clamp(19px,2vw,27px);line-height:1.5}.choice-row,.tab-row{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 28px}.response{background:#e9e3d7;padding:25px 28px;border-left:6px solid var(--earth);font-size:clamp(18px,1.8vw,25px);line-height:1.5;max-width:1040px}.response h3{font-family:Montserrat,Arial,sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;color:var(--earth)}.reveal{animation:rise .35s ease both}.prompt-form{display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:1080px}.prompt-form label{font-size:13px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--forest)}.prompt-form textarea{display:block;margin-top:8px;width:100%;height:104px;resize:vertical;border:2px solid #b8c8bb;background:#fff;padding:14px;font-size:17px;line-height:1.35;color:var(--ink)}.prompt-output{display:none;margin-top:20px;background:#fff;border-left:8px solid var(--forest);padding:20px;max-width:1080px;white-space:pre-wrap;font-size:18px;line-height:1.45}.prompt-output.show{display:block}.form-actions{display:flex;gap:12px;align-items:center;margin-top:18px}.choice-feedback{margin-top:20px;border-left:6px solid var(--forest);background:#e7ece4;padding:20px 24px;max-width:950px;font-size:20px;line-height:1.45}.choice-feedback.bad{border-color:var(--earth);background:#efe4d9}.source-link{color:var(--forest);font-size:17px;font-weight:700;text-underline-offset:4px}.quiz-options{display:grid;gap:12px;max-width:950px}.quiz-options button{text-align:left;background:#fff;border:2px solid #c3d0c4;padding:15px 20px;color:var(--ink);font-size:19px;line-height:1.3}.quiz-options button:hover{border-color:var(--forest);transform:translateX(4px)}.timer-panel{background:var(--deep);color:#fff;padding:24px 30px;display:flex;gap:20px;align-items:center;max-width:750px}.timer-panel strong{font:800 68px Montserrat,Arial,sans-serif;letter-spacing:-.07em}.timer-panel button{background:var(--tan);border:0;padding:13px 19px;color:var(--deep);font-weight:800}.parking{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1050px}.parking>div{border-top:5px solid var(--forest);padding-top:15px}.parking strong{font:700 25px Montserrat,Arial,sans-serif;color:var(--forest)}.parking p{font-size:19px;line-height:1.45}.source-note{font-size:13px;line-height:1.4;color:#526056;margin-top:25px}.footerbar{border-top:1px solid rgba(255,255,255,.12);font-size:11px;letter-spacing:.1em}.footer-controls{display:flex;align-items:center;gap:20px}.footer-controls button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;width:34px;height:34px;font-size:20px;line-height:1}.footer-controls button:hover{background:var(--tan);color:var(--deep)}#slideNumber{min-width:75px;text-align:center}.drawer{position:fixed;right:0;top:0;bottom:0;width:min(440px,100vw);background:var(--cream);box-shadow:-16px 0 60px rgba(0,0,0,.25);z-index:31;transform:translateX(105%);transition:transform .3s ease;display:flex;flex-direction:column;overflow:auto}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:25px 28px;border-bottom:1px solid var(--line)}.drawer-head h2{font-size:26px;margin:0;color:var(--deep)}.close{border:0;background:none;font-size:32px;color:var(--deep)}#outlineItems{padding:12px}.outline-item{display:block;width:100%;text-align:left;border:0;background:none;border-bottom:1px solid var(--line);padding:14px 13px;color:var(--ink);font-size:15px}.outline-item span{display:block;font-size:10px;letter-spacing:.15em;color:var(--earth);font-weight:800;margin-bottom:5px}.outline-item.active{background:#e4e8dc;border-left:4px solid var(--forest)}.notes-meta{padding:20px 28px 0;display:flex;justify-content:space-between;color:var(--earth);font-size:13px}.notes-text{padding:20px 28px;line-height:1.55;font-size:16px;white-space:pre-wrap;flex:1}.timer{position:sticky;bottom:0;padding:18px 28px;background:#e1e8df;display:flex;align-items:center;gap:8px}.timer div{margin-right:auto}.timer strong{display:block;font:800 27px Montserrat,Arial,sans-serif}.timer small{display:block;font-size:11px}.timer button{border:1px solid var(--forest);background:var(--forest);color:#fff;padding:8px 10px;font-size:12px}.scrim{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:30}.toast{position:fixed;bottom:75px;left:50%;transform:translate(-50%,20px);background:var(--deep);color:#fff;padding:12px 20px;z-index:40;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes slideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes orbit{to{transform:rotate(360deg)}}
+@media(max-width:760px){.app-shell{grid-template-rows:62px 4px minmax(0,1fr) 55px}.topbar-center,.footer-hint,.footer-tag{display:none}.slide{min-height:calc(100dvh - 121px);padding:38px 27px 55px}.slide::before{width:270px;height:270px;right:-155px;top:-110px}.cover .field-art{opacity:.25;right:-13%;top:9%;width:250px;height:250px}.agenda,.two-col,.prompt-form,.parking{grid-template-columns:1fr}.agenda{gap:0}.agenda-item span{font-size:20px}.two-col{gap:30px}.col p,.col li{font-size:21px}.prompt-form textarea{height:82px}.point-list li{font-size:22px;margin-bottom:17px}.footer-controls{width:100%;justify-content:space-between}.brand{font-size:11px}.brand-mark{width:35px;height:32px}.topbar-actions{gap:3px}.text-button{font-size:11px}.timer-panel strong{font-size:48px}.timer-panel{flex-wrap:wrap}.response{font-size:18px}.large-question{font-size:38px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+
+/* Projection scale and typographic controls */
+.slide h1,.slide h2,.slide h3,.large-question,.statement{ text-wrap:balance; }
+.slide p,.slide li,.slide .response,.slide .prompt-surface,.slide .choice-feedback,.slide .col{ text-wrap:pretty; }
+.slide p,.slide li,.slide h1,.slide h2,.slide h3{ orphans:2; widows:2; }
+.slide{ overflow-wrap:normal; hyphens:none; }
+.chapter-label{font-size:clamp(15px,1.05vw,19px);margin-bottom:24px}
+.small-copy{font-size:clamp(22px,1.55vw,28px);line-height:1.48}
+.statement-sub{font-size:clamp(23px,2vw,34px);line-height:1.42}
+.prompt-caption{font-size:clamp(20px,1.45vw,26px)}
+.prompt-label{font-size:clamp(16px,1vw,19px)}
+.prompt-surface{font-size:clamp(24px,1.85vw,34px);line-height:1.43}
+.live-pill{font-size:16px;letter-spacing:.12em}
+.col h3{font-size:clamp(21px,1.55vw,28px)}
+.col p,.col li{font-size:clamp(24px,1.95vw,34px);line-height:1.38}
+.point-list li{font-size:clamp(25px,2.25vw,39px);line-height:1.32;margin-bottom:24px}
+.agenda-item span{font-size:clamp(24px,1.75vw,31px)}
+.agenda-item b{font-size:clamp(19px,1.25vw,24px)}
+.question-sub{font-size:clamp(25px,1.8vw,33px)}
+.interactive-body p{font-size:clamp(24px,1.95vw,34px)}
+.interactive-body strong{font-size:clamp(30px,2.7vw,48px)}
+.response{font-size:clamp(24px,1.85vw,32px);line-height:1.42}
+.response h3{font-size:clamp(18px,1.3vw,23px)}
+.choice-feedback{font-size:clamp(22px,1.55vw,29px)}
+.quiz-options button{font-size:clamp(22px,1.55vw,28px);padding:16px 22px}
+.step-rail button,.choice-row button,.tab-row button,.action-button,.chip-button{font-size:clamp(18px,1.25vw,23px);padding:12px 17px}
+.prompt-form label{font-size:clamp(17px,1.05vw,21px)}
+.prompt-form textarea{font-size:clamp(21px,1.3vw,25px);line-height:1.42;min-height:105px}
+.prompt-output{font-size:clamp(21px,1.35vw,26px)}
+.parking strong{font-size:clamp(27px,1.8vw,34px)}
+.parking p{font-size:clamp(23px,1.5vw,28px)}
+.source-note{font-size:clamp(17px,1.05vw,20px);line-height:1.45}
+.source-link{font-size:inherit}
+.topbar-center{font-size:14px}
+.brand{font-size:14px}
+.brand em{font-size:13px}
+.text-button{font-size:15px}
+.footerbar{font-size:13px}
+.footer-controls button{width:40px;height:40px;font-size:23px}
+
+/* Controlled slide and furniture entrances */
+#stage.stage-exit .slide{animation:none!important;opacity:0;transform:translateY(-12px);transition:opacity .15s ease,transform .15s ease}
+.slide .chapter-label{animation:presentIn .48s .05s both}
+.slide h1,.slide h2{animation:presentIn .58s .12s both}
+.slide .hero-rule{animation:ruleIn .58s .2s both;transform-origin:left center}
+.slide .lead,.slide .statement,.slide .large-question{animation:presentIn .58s .22s both}
+.slide .statement-sub,.slide .question-sub,.slide .small-copy,.slide .prompt-caption{animation:presentIn .58s .31s both}
+.slide .agenda-item,.slide .point-list li,.slide .col,.slide .quiz-options button,.slide .parking>div{animation:presentIn .54s both}
+.slide .agenda-item:nth-child(1),.slide .point-list li:nth-child(1),.slide .col:nth-child(1),.slide .quiz-options button:nth-child(1),.slide .parking>div:nth-child(1){animation-delay:.24s}
+.slide .agenda-item:nth-child(2),.slide .point-list li:nth-child(2),.slide .col:nth-child(2),.slide .quiz-options button:nth-child(2),.slide .parking>div:nth-child(2){animation-delay:.31s}
+.slide .agenda-item:nth-child(3),.slide .point-list li:nth-child(3),.slide .quiz-options button:nth-child(3),.slide .parking>div:nth-child(3){animation-delay:.38s}
+.slide .agenda-item:nth-child(n+4),.slide .point-list li:nth-child(n+4){animation-delay:.45s}
+.slide .prompt-surface,.slide .response,.slide .interactive-body,.slide .prompt-form{animation:presentIn .62s .3s both}
+.slide .response.reveal,.slide .interactive-body.reveal{animation:presentIn .4s ease both}
+.slide .choice-row,.slide .tab-row,.slide .step-rail,.slide .form-actions{animation:presentIn .55s .22s both}
+.slide .source-note{animation:presentIn .5s .48s both}
+.slide::after{animation:furrowIn .8s .36s both}
+.topbar .brand{animation:furnitureIn .55s both}
+.topbar-center{animation:furnitureIn .6s .08s both}
+.topbar-actions{animation:furnitureIn .6s .14s both}
+.brand-mark i{animation:cropGrow .65s both;transform-origin:bottom}
+.brand-mark i:nth-child(2){animation-delay:.1s}
+.brand-mark i:nth-child(3){animation-delay:.2s}
+.footerbar{animation:footerIn .65s .18s both}
+@keyframes presentIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ruleIn{from{opacity:0;transform:scaleX(.1)}to{opacity:1;transform:scaleX(1)}}
+@keyframes furrowIn{from{opacity:0;transform:translateX(32px)}to{opacity:.8;transform:translateX(0)}}
+@keyframes furnitureIn{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes footerIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cropGrow{from{opacity:0;transform:scaleY(.1) rotate(18deg)}to{opacity:1;transform:scaleY(1) rotate(18deg)}}
+@media(max-width:760px){
+  .chapter-label{font-size:14px}
+  .small-copy{font-size:19px}
+  .statement-sub{font-size:21px}
+  .prompt-surface{font-size:22px}
+  .col p,.col li{font-size:22px}
+  .point-list li{font-size:22px}
+  .quiz-options button{font-size:20px}
+  .source-note{font-size:15px}
+  .prompt-form textarea{font-size:19px}
+  .topbar .brand{font-size:11px}
+  .text-button{font-size:12px}
+  .footerbar{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  #stage.stage-exit .slide,.slide *,.slide::after,.topbar .brand,.topbar-center,.topbar-actions,.brand-mark i,.footerbar{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}
+}
+
+/* Give the main ideas more of the slide canvas. */
+.slide{padding-left:clamp(28px,4.5vw,88px);padding-right:clamp(28px,4.5vw,88px)}
+.slide h1,.slide h2{max-width:1500px}
+.large-question,.slide .statement{max-width:1500px}
+.statement-sub,.question-sub{max-width:1350px}
+.agenda,.two-col,.point-list,.prompt-surface,.interactive-body,.response,.prompt-form,.prompt-output,.quiz-options,.choice-feedback,.parking{max-width:1500px;width:100%}
+.poll-question,.slide:not(.cover) .lead,.small-copy{max-width:1450px}
+.question-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:clamp(36px,5vw,90px);align-items:center;width:100%;max-width:1500px}
+.question-layout .large-question{max-width:none}
+.question-layout .question-sub{max-width:none}
+.question-cues{border-left:4px solid var(--tan);padding:8px 0 8px 28px}
+.question-cues>p,.definition-example strong{font-size:15px;text-transform:uppercase;letter-spacing:.15em;font-weight:800;color:var(--earth);margin-bottom:18px}
+.question-cues ul{list-style:none;padding:0;margin:0}
+.question-cues li{font-size:clamp(20px,1.7vw,27px);line-height:1.35;padding:13px 0;border-top:1px solid var(--line)}
+.definition-example{display:flex;align-items:baseline;gap:30px;border-top:2px solid var(--tan);padding-top:20px;margin-top:28px;max-width:1500px}
+.definition-example strong{flex:none;margin:0}
+.definition-example span{font-size:clamp(18px,1.45vw,24px);line-height:1.4;color:var(--forest)}
+.stepper-intro{font-size:clamp(20px,1.8vw,28px);line-height:1.45;max-width:1480px;margin:0 0 24px;color:var(--ink)}
+.glossary-intro{font-size:clamp(18px,1.4vw,23px);line-height:1.4;margin:-8px 0 18px;max-width:1450px}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 42px;width:100%;max-width:1500px;margin:0}
+.glossary-grid>div{border-top:2px solid var(--tan);padding:9px 0 0}
+.glossary-grid dt{font:700 clamp(17px,1.25vw,21px) Montserrat,Arial,sans-serif;color:var(--forest);margin-bottom:3px}
+.glossary-grid dd{font-size:clamp(15px,1.05vw,18px);line-height:1.35;margin:0;color:#3f4841}
+.glossary-resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:10px 32px;border-top:2px solid var(--forest);padding-top:11px;margin-top:16px;max-width:1500px}
+.resource-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
+.glossary-resources span{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--earth)}
+.glossary-resources a{font-size:16px;font-weight:700;color:var(--forest);text-underline-offset:4px}
+.glossary-resources a.download-link,.download-link{display:inline-flex;align-items:center;border:1px solid var(--forest);padding:7px 11px;color:var(--forest);font-size:15px;font-weight:800;text-decoration:none}
+.download-link:hover{background:var(--forest);color:var(--white)}
+.glossary-next{font-size:14px;font-weight:700;color:var(--earth);margin:12px 0 0}
+.term-tip{position:relative;display:inline;border-bottom:0;cursor:help;text-decoration:underline solid var(--forest);text-decoration-thickness:1px;text-underline-offset:4px;color:inherit}
+.term-tip:focus-visible{outline:3px solid #b66a3d;outline-offset:3px}
+.term-tip::after{content:attr(data-tip);position:absolute;z-index:70;left:50%;top:calc(100% + 10px);transform:translate(-50%,-4px);width:min(340px,75vw);padding:12px 14px;background:var(--deep);color:var(--white);font:500 16px/1.4 'DM Sans',Arial,sans-serif;letter-spacing:0;text-transform:none;box-shadow:0 10px 28px rgba(17,42,32,.25);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,transform .16s ease}
+.term-tip:hover::after,.term-tip:focus::after,.term-tip[aria-expanded="true"]::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(max-width:760px){
+ .question-layout{grid-template-columns:1fr;gap:18px}
+ .question-cues{padding-left:18px}
+ .question-cues li{font-size:18px;padding:9px 0}
+ .definition-example{display:block;margin-top:20px}
+ .definition-example strong{display:block;margin-bottom:8px}
+ .stepper-intro{font-size:18px}
+ .glossary-grid{grid-template-columns:1fr;gap:8px}
+ .glossary-resources{grid-template-columns:1fr;gap:12px}
+ .glossary-grid dt{font-size:18px}
+ .glossary-grid dd{font-size:15px}
+ .glossary-resources{gap:10px 18px}
+ .glossary-resources a{font-size:14px}
+}
+
+
+/* Use the available width consistently across every content slide. */
+#stage .slide:not(.cover){padding-left:clamp(26px,4vw,76px);padding-right:clamp(26px,4vw,76px)}
+#stage .slide h1,#stage .slide h2{width:100%;max-width:none}
+#stage .slide:not(.cover) .lead,#stage .slide .small-copy,#stage .slide .statement,#stage .slide .statement-sub,#stage .slide .large-question,#stage .slide .question-sub,#stage .slide .stepper-intro,#stage .slide .source-note{width:100%;max-width:none}
+#stage .slide .agenda,#stage .slide .two-col,#stage .slide .point-list,#stage .slide .parking,#stage .slide .prompt-form,#stage .slide .prompt-surface,#stage .slide .prompt-output,#stage .slide .quiz-options,#stage .slide .choice-feedback,#stage .slide .interactive-body,#stage .slide .response,#stage .slide .poll-layout,#stage .slide .poll-question,#stage .slide .question-layout,#stage .slide .definition-example,#stage .slide .glossary-grid,#stage .slide .glossary-resources{width:100%;max-width:none}
+#stage .slide .question-layout.single-question{grid-template-columns:minmax(0,1fr)}
+#stage .slide .question-layout.single-question>div{width:100%;max-width:none}
+
+/* Give the three prompt demos a clear visual progression. */
+.demo-phase{display:inline-block;margin:0 0 14px;padding:8px 12px;font-size:11px;font-weight:900;letter-spacing:.15em;background:#f2dfd2;color:#743f26}
+.demo-step-2{background:#dce8df;color:#214735}
+.demo-step-3{background:#efe4c9;color:#624e21}
+.demo-input{width:100%;max-width:none}
+.copy-prompt{display:block;margin-top:12px}
+#stage .slide .demo-step-1~.demo-input .prompt-surface{border-left-color:#8b4d2e}
+#stage .slide .demo-step-2~h2+.demo-input .prompt-surface{border-left-color:#35664b}
+#stage .slide .demo-step-3~h2+.demo-input .prompt-surface{border-left-color:#9a792c}
+
+/* Separate presenter window synced with the projected deck. */
+body.presenter-mode{display:block;min-height:100vh;background:var(--cream)}
+body.presenter-mode .app-shell,body.presenter-mode .drawer,body.presenter-mode .scrim,body.presenter-mode .toast,body.presenter-mode .print-toolbar{display:none!important}
+body.presenter-mode #presenterView{display:flex;min-height:100vh;flex-direction:column;background:var(--cream);color:var(--ink)}
+.presenter-header{padding:20px 26px;background:var(--deep);color:#fff}
+.presenter-header strong{font:800 14px/1.3 Montserrat,Arial,sans-serif;letter-spacing:.1em}
+.presenter-header strong span{display:block;color:var(--tan);font-size:11px;letter-spacing:.2em}
+.presenter-header p{margin:14px 0 0;color:#dce9dd;font-size:14px}
+.presenter-content{flex:1;padding:24px 26px;overflow:auto}
+.presenter-kicker{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--earth)}
+.presenter-kicker span{display:block;margin-top:6px;color:#647568;letter-spacing:.06em}
+.presenter-content h1{max-width:none;margin:20px 0 8px;color:var(--deep);font-size:clamp(30px,5vw,48px);line-height:1.05}
+.presenter-chapter{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--earth)}
+.presenter-notes{margin-top:22px;padding:20px;border-left:5px solid var(--forest);background:#fff;box-shadow:0 8px 24px rgba(23,49,40,.08);font-size:17px;line-height:1.6;white-space:pre-wrap}
+.presenter-next{margin-top:20px;padding:14px 16px;border-top:1px solid #d7cdb8;color:var(--deep)}
+.presenter-next small{display:block;margin-bottom:5px;font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--earth)}
+.presenter-next strong{font-size:17px}
+.presenter-controls{position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--deep);color:#fff}
+.presenter-controls button{border:1px solid #dce9dd;background:transparent;color:#fff;padding:9px 14px;font-weight:700}
+.presenter-controls button:disabled{opacity:.4}
+
+/* Session 2 uses the established Day 1 layout and projection styles. */
+#stage .slide, #printDeck .slide { padding-block: clamp(25px, 4vh, 54px); }
+#stage .slide h2 { font-size: clamp(39px, 4.65vw, 78px); margin-bottom: clamp(18px, 3vh, 32px); }
+#stage .slide h1 { font-size: clamp(49px, 7.2vw, 125px); }
+#stage .cover h1 { font-size: clamp(64px, 9vw, 145px); }
+#stage .slide .chapter-label { margin-bottom: clamp(14px, 2.3vh, 24px); }
+#stage .statement { font-size: clamp(32px, 4.35vw, 69px); }
+#stage .large-question { font-size: clamp(36px, 5.3vw, 76px); margin-bottom: 0; text-wrap: balance; }
+.agenda-item b { min-width: 3.4ch; }
+.agenda-item { padding-block: 11px; }
+.agenda { gap: 6px 60px; }
+.agenda-item span { line-height: 1.2; }
+.topbar-center { text-transform: uppercase; }
+.timing { white-space: nowrap; }
+.lead a, .resource-links a { color: var(--forest); text-underline-offset: .2em; }
+.resource-links { display:flex; flex-wrap:wrap; gap:14px 25px; margin-top: 18px; }
+.resource-links a { font-size: clamp(18px, 1.6vw, 26px); font-weight: 750; }
+.scenario-panel { width: 100%; }
+.agenda-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.agenda-actions a { text-decoration: none; }
+#stage .practice-library { justify-content: flex-start; }
+#libraryPanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: clamp(10px, 1.8vw, 26px); }
+.library-prompt { min-width: 0; padding: 13px 16px; border-top: 3px solid var(--forest); background: #e9e5db; }
+.library-prompt strong { display: block; color: var(--forest); font-size: clamp(17px, 1.55vw, 25px); }
+.library-prompt p { margin: 7px 0 11px; font-size: clamp(16px, 1.4vw, 22px); line-height: 1.35; overflow-wrap: anywhere; }
+.library-prompt button { font-size: clamp(14px, 1.05vw, 19px); padding: 7px 12px; }
+#stage .work-slide { padding-block: clamp(17px, 2.8vh, 36px); }
+#stage .work-slide.capstone { padding-block: clamp(14px, 2.2vh, 27px); }
+#stage .work-slide h2 { font-size: clamp(34px, 4vw, 68px); margin-bottom: clamp(12px, 1.8vh, 20px); }
+#stage .work-slide:has(.work-reveal[open]) { padding-block: clamp(12px, 2vh, 25px); }
+.work-output { font-size: clamp(19px, 1.7vw, 29px); font-weight: 700; line-height: 1.32; color: var(--forest); margin: 0 0 18px; }
+.work-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(21px, 4.2vw, 66px); }
+.work-column { min-width: 0; border-top: 3px solid var(--tan); padding-top: 12px; }
+.work-column + .work-column { border-color: var(--forest); }
+.work-column h3 { color: var(--earth); font-weight: 800; font-size: clamp(15px, 1.3vw, 22px); text-transform: uppercase; letter-spacing: .09em; margin: 0 0 10px; }
+.work-column + .work-column h3 { color: var(--forest); }
+.work-source, .work-steps { margin: 0; padding: 0; list-style: none; font-size: clamp(17px, 1.45vw, 24px); line-height: 1.33; }
+.work-source li + li { margin-top: 9px; }
+.practice-data { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: clamp(16px, 1.3vw, 21px); line-height: 1.2; }
+.practice-data th, .practice-data td { text-align: left; padding: 3px 8px; border-bottom: 1px solid var(--tan); }
+.practice-data th { color: var(--forest); font-weight: 750; }
+.practice-data :is(th, td):nth-child(2) { text-align: right; font-variant-numeric: tabular-nums; }
+.work-steps li { display: grid; grid-template-columns: 4.4rem minmax(0, 1fr); gap: 8px; padding: 5px 8px; margin-left: -8px; border-left: 3px solid transparent; }
+.work-steps b { color: var(--forest); font-size: .9em; white-space: nowrap; }
+.work-steps li[data-current] { border-color: var(--forest); background: #e5ebdf; }
+.solo-step { display: block; color: var(--forest); font-size: clamp(15px, 1.18vw, 19px); line-height: 1.34; margin-top: 4px; }
+.work-shortcuts { display: none; }
+.work-controls, .round-clock { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.work-controls { margin-top: 17px; gap: 13px; }
+.round-clock output { font: 750 clamp(22px, 2vw, 34px)/1 Montserrat, Arial, sans-serif; color: var(--forest); font-variant-numeric: tabular-nums; min-width: 4.2ch; }
+.work-controls button, .case-buttons button { font-size: clamp(14px, 1.05vw, 19px); padding: 8px 12px; }
+.case-buttons { margin: 0 0 14px; }
+.work-disclosures { display: flex; flex-wrap: wrap; align-items: start; column-gap: 26px; row-gap: 5px; margin-top: 12px; }
+.work-reveal { color: var(--forest); flex: 0 1 auto; }
+.work-reveal[open] { flex: 1 1 310px; }
+.work-reveal summary { cursor: pointer; font-size: clamp(16px, 1.05vw, 20px); font-weight: 750; padding-block: 5px; }
+.work-detail { font-size: clamp(17px, 1.2vw, 22px); color: var(--ink); border-left: 4px solid var(--earth); background: #ebe3d8; padding: 9px 12px; margin: 2px 0 0; line-height: 1.35; }
+.work-reveal:has([data-copy-starter]) .work-detail { white-space: pre-line; }
+.work-reveal [data-copy-starter] { margin-top: 8px; font-size: clamp(14px, 1.05vw, 19px); padding: 8px 12px; }
+.work-flow { display: grid; grid-template-columns: 3fr 1.45fr; align-items: center; gap: 6px 30px; margin: 8px 0 0; color: var(--forest); }
+.work-flow figcaption { grid-column: 1 / -1; font-weight: 750; }
+.flow-steps, .flow-paths { display: grid; margin: 0; padding: 0; list-style: none; }
+.flow-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.flow-paths { position: relative; gap: 5px; }
+.flow-steps li, .flow-paths li { position: relative; padding: 5px 8px; border: 1px solid var(--forest); background: #e5ebdf; font-size: clamp(14px, 1.1vw, 18px); line-height: 1.23; }
+.flow-steps li:last-child { border-width: 2px; }
+.flow-steps li::after, .flow-paths li::before { position: absolute; top: 50%; transform: translateY(-50%); font-weight: 750; content: '→'; }
+.flow-steps li::after { left: calc(100% + 5px); }
+.flow-steps li:last-child::after { content: ''; width: 15px; height: 1px; left: 100%; background: var(--forest); }
+.flow-paths::before { content: ''; position: absolute; left: -15px; top: 25%; bottom: 25%; border-left: 1px solid var(--forest); }
+.flow-paths li::before { right: calc(100% + 2px); }
+.flow-paths strong { margin-right: .35em; }
+
+@media (min-width: 701px) {
+  #stage .work-slide:has(.work-reveal[open] .work-flow) { justify-content: flex-start; padding-block: 11px; }
+  #stage .work-slide:has(.work-reveal[open] .work-flow) .chapter-label { margin-bottom: 8px; }
+  #stage .work-slide:has(.work-reveal[open] .work-flow) h2 { font-size: clamp(31px, 3.45vw, 57px); margin-bottom: 8px; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-output { margin-bottom: 10px; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-column { padding-top: 7px; }
+  .work-slide:has(.work-reveal[open] .work-flow) :is(.work-source, .work-steps) { font-size: clamp(16px, 1.3vw, 22px); line-height: 1.28; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-steps li { padding-block: 3px; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-detail { padding-block: 6px; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-controls { margin-top: 8px; }
+  .work-slide:has(.work-reveal[open] .work-flow) .work-disclosures { margin-top: 4px; }
+}
+
+@media (max-width: 700px), print {
+  .work-flow { display: block; }
+  .flow-steps { grid-template-columns: 1fr; gap: 14px; margin-top: 4px; }
+  .flow-steps li::after, .flow-steps li:last-child::after { content: '↓'; top: 100%; left: 50%; width: auto; height: auto; background: none; transform: translateX(-50%); line-height: 1; }
+  .flow-paths { grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 14px; }
+  .flow-paths::before, .flow-paths li::before { display: none; }
+}
+.slide .prompt-surface { padding: clamp(18px, 2.1vw, 30px); }
+#stage .stepped-demo { padding-block: clamp(16px, 2.4vh, 29px); }
+#stage .stepped-demo h2 { font-size: clamp(36px, 4.05vw, 68px); margin-bottom: 20px; }
+#stage .stepped-demo .chapter-label, .stepped-demo .prompt-label { margin-bottom: 12px; }
+#stage .stepped-demo .demo-phase { margin-bottom: 8px; }
+#stage .stepped-demo .prompt-surface { line-height: 1.31; padding: clamp(16px, 1.5vw, 24px) clamp(18px, 2.1vw, 30px); }
+.slide .prompt-caption { margin: 16px 0 0; }
+.demo-samples { display: flex; flex-wrap: wrap; align-items: start; gap: 4px 24px; margin-top: 10px; }
+.demo-sample { color: var(--forest); }
+.demo-sample[open] { flex: 1 1 410px; }
+.demo-sample summary { cursor: pointer; font-size: clamp(16px, 1.15vw, 20px); font-weight: 750; padding-block: 4px; }
+.demo-detail { white-space: pre-wrap; }
+#stage .prompt-example { justify-content: flex-start; padding-block: clamp(20px, 3.4vh, 40px) 14px; }
+#stage .prompt-example h2 { font-size: clamp(36px, 4.05vw, 65px); margin-bottom: 14px; }
+.example-cases { margin-bottom: 19px; }
+.example-title { color: var(--forest); font: 750 clamp(20px, 2vw, 32px)/1.25 Montserrat, Arial, sans-serif; margin: 0 0 8px; }
+.example-source { font-size: clamp(18px, 1.6vw, 26px); line-height: 1.36; max-width: 1400px; margin: 0 0 15px; }
+.example-levels { gap: 10px; margin: 0 0 15px; }
+.example-levels button { min-width: 7ch; padding: 9px 18px; }
+.example-copy { align-self: flex-start; margin-top: 12px; font-size: clamp(15px, 1.15vw, 20px); padding: 8px 14px; }
+#stage .prompt-example .prompt-surface { animation-duration: .28s; animation-delay: 0s; line-height: 1.36; padding-block: clamp(15px, 1.5vw, 22px); }
+#stage .prompt-example .example-change { animation-duration: .28s; animation-delay: .04s; }
+.prompt-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
+.prompt-actions .copy-prompt { margin: 0; }
+.demo-phase { align-self: flex-start; font-size: clamp(13px, 1vw, 17px); }
+.slide .review-lead { margin-bottom: 22px; }
+.review-details { width: 100%; margin-top: 4px; }
+.review-details summary { display: list-item; width: fit-content; cursor: pointer; }
+.review-details .response { margin: 10px 0 0; padding: 18px 23px; }
+.slide .point-list li { margin-bottom: clamp(13px, 2.5vh, 24px); }
+.drawer[open] { margin: 0 0 0 auto; inset: 0 0 0 auto; height: 100%; max-height: none; max-width: 100vw; border: 0; padding: 0; color: var(--ink); transform: none; }
+.drawer:not([open]) { display: none; }
+.drawer::backdrop { background: rgba(0,0,0,.42); }
+.drawer .close { padding: 0 8px; }
+.outline-item { font-size: 16px; }
+.outline-item span { font-size: 12px; }
+.outline-section { color: var(--forest); font-size: 16px; margin: 22px 12px 5px; }
+.outline-section:first-child { margin-top: 7px; }
+#presenterView[hidden] { display: none; }
+body.presenter-mode #presenterView:not([hidden]) { display:flex; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.noscript { margin: 20px; color: #fff; }
+
+@media (max-width: 760px) {
+  #stage .slide { padding-block: 29px 38px; }
+  #stage .slide h2 { font-size: clamp(32px, 8vw, 47px); }
+  #stage .stepped-demo h2 { font-size: clamp(32px, 8vw, 47px); }
+  #stage .prompt-example h2 { font-size: clamp(30px, 7.7vw, 45px); }
+  .example-levels { gap: 7px; }
+  .example-levels button { padding: 8px 12px; min-width: 0; }
+  #stage .dark:not(.cover) h1 { font-size: clamp(35px, 8.2vw, 57px); }
+  #stage .slide .prompt-surface { font-size: 19px; border-left-width: 7px; }
+  #stage .slide .point-list li { font-size: 21px; }
+  #stage .slide .two-col { margin-top: 0; }
+  .agenda-item { padding-block: 9px; }
+  .agenda-item span { font-size: 20px; }
+  .col p { margin-bottom: 10px; }
+  #stage .work-slide h2 { font-size: clamp(29px, 7.8vw, 40px); }
+  .work-grid { grid-template-columns: 1fr; gap: 15px; }
+  .work-controls { gap: 8px; }
+  .work-disclosures { column-gap: 14px; }
+  .work-shortcuts { display: flex; flex-wrap: wrap; gap: 5px 16px; margin: -5px 0 15px; }
+  .work-shortcuts button { color: var(--forest); background: transparent; border: 0; padding: 0; min-height: 36px; font-weight: 700; text-decoration: underline; text-underline-offset: .16em; }
+  .solo-step { font-size: 15px; }
+}
+@media (max-width: 515px) {
+  #presenterButton, #printButton { display: none; }
+  .topbar { gap: 4px; padding-inline: 13px; }
+  .topbar .brand { gap: 8px; letter-spacing: .07em; }
+  .brand em { font-size: 10px; }
+  .topbar .text-button { padding-inline: 5px; }
+}
+@media print {
+  @page { size: landscape; margin: .42in; }
+  body { background: white!important; color: #222!important; }
+  #shell, dialog, #toast, #presenterView { display: none!important; }
+  #printDeck { display: block!important; }
+  #printDeck .slide { display: block; min-height: 0; background: white!important; color: #222!important; padding: 12pt 8pt; break-after: page; animation: none!important; }
+  #printDeck .slide * { animation: none!important; }
+  #printDeck .slide:last-child { break-after: auto; }
+  #printDeck .slide::before, #printDeck .slide::after, #printDeck .field-art, #printDeck button { display: none!important; }
+  #printDeck h1, #printDeck h2 { font-size: 28pt; margin-bottom: 15pt; }
+  #printDeck p, #printDeck li, #printDeck .agenda-item span, #printDeck .agenda-item b { font-size: 15pt; line-height: 1.3; color: #222!important; }
+  #printDeck .chapter-label, #printDeck .demo-phase { font-size: 10pt; margin-bottom: 12pt; }
+  #printDeck .prompt-surface, #printDeck .response { box-shadow: none; font-size: 15pt; padding: 12pt; }
+  #printDeck .point-list li { margin-bottom: 10pt; }
+  #printDeck .practice-print { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10pt 18pt; }
+  #printDeck .practice-print h3 { margin: 0 0 5pt; font-size: 13pt; }
+  #printDeck .practice-print p { margin-bottom: 4pt; font-size: 11pt; }
+  #printDeck .practice-library h2 { margin-bottom: 8pt; }
+  #printDeck .practice-library .practice-print { gap: 5pt 18pt; }
+  #printDeck .library-prompt { background: transparent; border: 0; padding: 0; margin-bottom: 3pt; }
+  #printDeck .library-prompt strong { font-size: 10pt; }
+  #printDeck .library-prompt p { margin: 2pt 0 0; font-size: 9.5pt; line-height: 1.2; }
+  #printDeck .capstone .practice-print { row-gap: 6pt; }
+  #printDeck .capstone .practice-print p { font-size: 10.5pt; line-height: 1.2; margin-bottom: 3pt; }
+  #printDeck .resource-links a { font-size: 15pt; }
+  #printDeck .example-source { font-size: 13pt; }
+  #printDeck .example-print section { border-top: 1px solid #999; padding-top: 7pt; }
+  #printDeck .example-print h3 { font-size: 12pt; margin: 0 0 3pt; }
+  #printDeck .example-print .example-print-prompt { margin: 0 0 3pt; font-size: 13pt; }
+  #printDeck .example-print .example-change { margin: 0 0 7pt; font-size: 11pt; }
+  #printDeck .work-grid { grid-template-columns: 1fr 1fr; gap: 23pt; }
+  #printDeck .work-grid li { font-size: 12pt; }
+  #printDeck .practice-data { font-size: 10pt; }
+  #printDeck .work-flow { font-size: 10pt; }
+  #printDeck .work-flow li { font-size: 9pt; line-height: 1.2; }
+  #printDeck .solo-step { font-size: 10pt; line-height: 1.25; margin-top: 3pt; }
+  #printDeck .demo-samples { display: flex; align-items: start; gap: 12pt; margin-top: 12pt; }
+  #printDeck .demo-sample { flex: 1; min-width: 0; }
+  #printDeck .demo-sample h3 { font-size: 12pt; margin: 0 0 4pt; }
+  #printDeck .demo-sample .demo-detail { font-size: 11pt; background: transparent; margin: 0; padding: 4pt 7pt; }
+  #printDeck .work-output, #printDeck .worksheet-update, #printDeck .worksheet-update p { font-size: 13pt; }
+  #printDeck .worksheet-starter { margin-top: 12pt; font-size: 11pt; }
+  #printDeck .worksheet-starter p { margin: 4pt 0 0; font-size: 11pt; }
+  #printDeck .work-column .worksheet-starter { margin-top: 9pt; }
+  #printDeck .worksheet:has(.worksheet-update) .work-source li + li { margin-top: 5px; }
+  #printDeck .worksheet-update { border-top: 1px dashed #777; padding: 9pt 0 0; margin-top: 18pt; break-inside: avoid; }
+  #printDeck .worksheet-update p { margin: 5pt 0 0; }
+  #printDeck .worksheet-writing { margin-top: 14pt; min-height: 105pt; border: 1px solid #999; padding: 10pt; }
+  #printDeck .worksheet-key-note { display: block; font-size: 9pt; margin-top: 3pt; }
+  #printDeck .worksheet { min-height: 0; }
+  #printDeck .print-review-intro { font-size: 12pt; }
+  #printDeck .print-review-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt 22pt; }
+  #printDeck .print-review-list section { break-inside: avoid; border-top: 1px solid #999; padding-top: 7pt; }
+  #printDeck .print-review-list h3 { font-size: 13pt; margin: 0 0 5pt; }
+  #printDeck .print-review-list p { font-size: 11pt; margin: 0; }
+}
+</style>
+</head>
+<body>
+  <div class="app-shell" id="shell">
+    <header class="topbar">
+      <button class="brand" id="home" aria-label="Go to first slide"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>REICKS VIEW FARMS <em>AI 101</em></span></button>
+      <div class="topbar-center"><span id="chapter"></span><span class="topbar-divider"></span><span id="timing"></span></div>
+      <div class="topbar-actions">
+        <button class="text-button" id="outlineButton" aria-controls="outline" aria-expanded="false">Outline</button>
+        <button class="text-button" id="notesButton" aria-controls="notes" aria-expanded="false">Facilitator</button>
+        <button class="text-button" id="presenterButton">Presenter</button>
+        <button class="text-button" id="printButton" aria-label="Print or save slides as PDF">PDF</button>
+      </div>
+    </header>
+    <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
+    <main id="stage" tabindex="-1" aria-label="Presentation"></main>
+    <footer class="footerbar">
+      <span class="footer-hint">Use ← → keys to navigate</span>
+      <div class="footer-controls"><button id="prev" aria-label="Previous slide">←</button><span id="slideNumber" role="status"></span><button id="next" aria-label="Next slide">→</button></div>
+      <span class="footer-tag">REICKS VIEW FARMS · SESSION 2</span>
+    </footer>
+  </div>
+  <dialog id="outline" class="drawer" aria-labelledby="outlineTitle">
+    <div class="drawer-head"><h2 id="outlineTitle">Session outline</h2><button class="close" aria-label="Close outline">×</button></div>
+    <div id="outlineItems"></div>
+  </dialog>
+  <dialog id="notes" class="drawer notes-drawer" aria-labelledby="notesTitle">
+    <div class="drawer-head"><h2 id="notesTitle">Facilitator view</h2><button class="close" aria-label="Close facilitator notes">×</button></div>
+    <div class="notes-meta"><strong id="notesTime"></strong><span id="notesSlide"></span></div>
+    <div id="notesText" class="notes-text"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <section id="presenterView" hidden aria-label="Presenter notes window">
+    <header class="presenter-header"><strong>REICKS VIEW FARMS <span>AI 101 · SESSION 2</span></strong></header>
+    <main class="presenter-content">
+      <div class="presenter-kicker">FACILITATOR NOTES <span id="presenterMeta"></span></div>
+      <h1 id="presenterTitle"></h1>
+      <div class="presenter-notes" id="presenterNotes"></div>
+      <section class="presenter-next"><small>NEXT SLIDE</small><strong id="presenterNext"></strong></section>
+    </main>
+    <footer class="presenter-controls"><button id="presenterPrev">Previous</button><span id="presenterCount"></span><button id="presenterNextButton">Next</button></footer>
+  </section>
+  <div id="printDeck" hidden></div>
+  <noscript><p class="noscript">Enable JavaScript in your browser to open the presentation.</p></noscript>
+  <script>const rounds = {
+  notes: {
+    source: [
+      'Wednesday at 8 AM stays booked. Thursday, 1–3 PM, is a proposed alternate window.',
+      'Morgan will call the carrier by Tuesday at 3 PM. Both shifts need an update after the decision. The update has no assigned owner or deadline.',
+      'The AI draft reads “Morgan will call the carrier by Tuesday at 3 PM, update both shifts by then and move the pickup to Thursday.”'
+    ],
+    output: 'A marked-up draft and one question to resolve before sharing.',
+    starter: 'Correct the unsupported details in this draft using only the huddle notes.',
+    steps: [
+      [4, 'Mark which claims the notes support and which ones the draft assumed.'],
+      [6, 'Fix the unsupported details with your tool or on paper.'],
+      [6, 'Swap drafts. Check the edits against the notes and write one question before sharing.',
+        'Check each changed line against the notes. Write your question, then open the review key.']
+    ],
+    review: 'Morgan owns the carrier call by Tuesday at 3 PM. The shift update needs an owner and deadline. Wednesday at 8 AM stays booked and Thursday is tentative. One question to ask is who will tell both shifts once the carrier responds.',
+    extra: 'Ask for a two-sentence update for the next shift that keeps the Thursday window tentative.'
+  },
+  onboarding: {
+    source: [
+      'A new employee starts Monday. Jamie will meet them at 8 AM and introduce them to the team.',
+      'The employee needs equipment pickup and an orientation. The times and locations for both are open.',
+      'A manager check-in is planned for the end of the day. The time is still open.'
+    ],
+    output: 'A checklist that shows when to meet Jamie and what still needs confirming.',
+    starter: 'Make a first-day checklist from these onboarding notes.',
+    steps: [
+      [4, 'Read the notes as the new employee. Mark where you’d need more information.'],
+      [6, 'Put your checklist in a blank document or on paper. Add checkboxes and mark open times and places.'],
+      [6, 'Swap checklists. Identify one item HR or the manager must confirm before sharing.',
+        'Read it as the new hire. Circle one open time or location, then check the review key.']
+    ],
+    review: 'The checklist can say to meet Jamie at 8 AM on Monday. Equipment pickup and orientation still need times and locations. The manager check-in is planned for the end of the day and needs a specific time.',
+    extra: 'Write one short message asking the manager to confirm the most important missing detail.'
+  },
+  contracts: {
+    source: [
+      'The vendor must give the buyer at least two business days’ notice of a schedule change.',
+      'Written notice goes to the buyer’s designated contact. Section 6 describes how notice must be sent.',
+      'This excerpt omits Section 6 and the contact’s name. A colleague asks whether a text message counts as notice.'
+    ],
+    output: 'Two or three questions for the contract owner, with the most urgent marked.',
+    starter: 'What should I ask the contract owner before relying on this excerpt?',
+    steps: [
+      [3, 'Read the excerpt and mark where it points to information you don’t have.'],
+      [5, 'Draft two or three questions that would help the owner resolve the uncertainty.'],
+      [4, 'Swap lists. Pick the question you’d ask first and point to the wording behind it.',
+        'Rank your questions and underline the wording behind your top one. Then check the review key.']
+    ],
+    review: 'Ask what Section 6 permits, who the designated contact is and how the two business days are counted. The excerpt alone leaves the text-message question open.',
+    extra: 'Turn the most urgent question into a one-sentence request for the relevant clause.'
+  },
+  deliveryException: {
+    source: [
+      'The supplier can only arrive at 2:30 PM Friday. Receiving coverage ends at 2 PM.',
+      'Thursday at 9 AM is still booked. Both sides need to agree before the booking moves.',
+      'Alex will contact the receiving lead at 8 AM Thursday. A draft calendar note already says “Friday at 2:30 PM confirmed.”'
+    ],
+    output: 'A corrected calendar note and a short request for the receiving lead.',
+    starter: 'Flag the conflict between the supplier’s availability and receiving coverage. Write one calendar note that keeps Thursday booked and marks Friday at 2:30 PM as pending. Draft a two-sentence request Alex can send to the receiving lead. State what both sides must confirm before the calendar changes.',
+    steps: [
+      [4, 'Mark what’s booked, what’s requested and where the coverage gap is.'],
+      [7, 'Draft the calendar note and the question Alex needs to ask.'],
+      [6, 'Trade drafts and check whether someone could mistake the request for a confirmed booking.',
+        'Read your note as the receiving lead. Check which time is booked, then open the review key.']
+    ],
+    review: 'Keep Thursday at 9 AM booked. Friday at 2:30 PM is pending. Alex needs the receiving lead to confirm coverage and both sides to agree before the calendar changes.',
+    extra: 'The lead confirms Friday coverage through 3 PM. Update the calendar note to reflect that one step toward confirmation.'
+  },
+  production: {
+    source: [
+      'During the morning round, a feed cart stopped at 6:35 AM near the west aisle and again at 6:50 AM near staging.',
+      'Casey logged both stops and notified the shift lead at 7 AM. Status and follow-up are open.',
+      'For this case, record confirmed updates from the lead. If status is open, mark it pending and ask who will follow up.'
+    ],
+    output: 'A process flow that shows what was logged and how the next shift handles an open status.',
+    starter: 'Turn these notes into a simple flowchart for the incoming crew. Use short boxes joined by arrows. Show what Casey logged, who was told and when, and a yes/no question about confirmed status. Label both paths. Use only the information in the case.',
+    steps: [
+      [2, 'Mark what Casey logged, who was told and what’s still open.'],
+      [3, 'Draft box labels with AI or by hand. Draw arrows and a yes/no split.'],
+      [3, 'Trade diagrams. Trace both paths and check which one applies now.',
+        'Trace both paths, then open the review key.']
+    ],
+    review: 'This case follows No. Check both stops and the 7 AM notification.',
+    flow: {
+      steps: ['Casey logs both stops', 'Casey tells shift lead at 7 AM', 'Has the lead confirmed status?'],
+      paths: [['Yes', 'Record the confirmed update.'], ['No', 'Mark status pending and ask who will follow up.']]
+    },
+    extra: 'Add the time and location of both stops to the first box. Check whether the flow still reads at a glance.'
+  },
+  management: {
+    title: 'Management',
+    source: [
+      'An inventory count needs one two-hour block or two one-hour blocks. Receiving needs one person on duty throughout.',
+      'Friday has two separate one-hour windows with confirmed coverage. Coverage for a continuous two-hour window is open.',
+      'Draft brief: “Run the count in one two-hour block Friday. Coverage is confirmed.”'
+    ],
+    output: 'A short decision brief comparing the inventory count options.',
+    starter: 'Check the draft against the coverage notes. Compare the two inventory count options in 100 words or fewer. Identify which fits confirmed coverage and which would require another check. End with the decision the schedule owner needs to make.',
+    steps: [
+      [3, 'Find the unsupported claim about coverage.'],
+      [5, 'Draft a brief that compares both options and flags open decisions.'],
+      [4, 'Trade briefs. Check the constraints and name the reviewer.',
+        'Check each option against the coverage notes and name the reviewer. Then open the review key.']
+    ],
+    review: 'The split count fits confirmed Friday coverage. A continuous two-hour block depends on additional coverage. The schedule owner decides whether the count can be split or a longer slot needs to be arranged.',
+    extra: 'Write a follow-up question about what must carry over between the two count blocks.'
+  },
+  bookkeeping: {
+    title: 'Bookkeeping',
+    source: ['A draft says $580 is approved. Use these invoice entries to check it.'],
+    sheet: [
+      ['Invoice', 'Amount ($)', 'Status'],
+      ['A', 120, 'Approved'],
+      ['B', 80, 'Approved'],
+      ['C', 210, 'Approved'],
+      ['D', 90, 'Pending'],
+      ['B', 80, 'Approved']
+    ],
+    output: 'A corrected total and a note explaining which entries to leave out.',
+    starter: 'Check invoice status and look for repeated invoice IDs. Show the approved entries you counted once, calculate their total and explain why any entries were left out. End with the item that still needs approval.',
+    steps: [
+      [3, 'Copy the data into cell A1 of a blank spreadsheet, or use the table on paper.'],
+      [5, 'Mark the pending and repeated rows. Add the remaining amounts with SUM or by hand.'],
+      [4, 'Trade notes. Check the total and explain which rows you left out.',
+        'Add the unique approved entries again. Compare your total with the review key.']
+    ],
+    review: 'A, B and C total $410. Leave out pending D and count B once. The draft’s $580 includes both D and the extra $80 entry for B.',
+    extra: 'Invoice D is approved. Update the total and explain why the second entry for B stays out.'
+  },
+  guardrails: {
+    copy: false,
+    source: [
+      'Rewrite a public community event notice.',
+      'Summarize a spreadsheet with named employees and payroll amounts.',
+      'Ask an AI tool for repair instructions after a piece of equipment stops.'
+    ],
+    output: 'For each request, name the first safe step and who should review the work.',
+    steps: [
+      [2, 'Pick Try, Ask first or Keep out for each request. Write the first step you would take.'],
+      [3, 'Compare answers. Identify what you would need permission to use.',
+        'Circle the information that needs permission and name who you’d ask.'],
+      [3, 'Share one case where a person needs to make the decision.',
+        'Write down the decision and who owns it. Then check the review key.']
+    ],
+    review: 'Use fictional or public information for practice. Check notice details against the source. Confirm permission before using payroll data. For equipment problems, gather observations and questions for qualified staff using approved procedures.',
+    extra: 'Turn one sensitive request into a useful task with a blank template or fictional facts.'
+  }
+};
+
+const capstoneSteps = [
+  [7, 'Write a prompt and produce the first draft with an approved tool or on paper.'],
+  [6, 'Open the new information. Ask for targeted edits, the facts to keep and anything still open.'],
+  [9, 'Exchange drafts. Check two facts against the source and name the reviewer.',
+    'Mark two facts in your draft and find their sources. Name the reviewer, then open the review key.']
+];
+
+const capstoneRevision = 'Use the update below to find every line that needs to change. Revise only those lines and keep the original audience and format. Preserve facts the update didn’t change. After the draft, list the changes, the fact supporting each one and anything still open.\n\nNew information: [paste the update here]';
+
+const capstoneCases = [
+  {
+    title: 'Communications',
+    output: 'A flyer, a captioned image or a short video storyboard, plus a revision and two checks.',
+    source: [
+      'Open house: Saturday, 9 AM–noon, east gate. Parking is pending. Choose one format and show the hours and entrance in readable text.',
+      'Flyer: lay out a headline, event details and a visual.',
+      'Image: sketch or create a picture and write a caption.',
+      'Video: storyboard three shots for 15 seconds with on-screen text.'
+    ],
+    update: 'The event team confirmed the west gate replaces the east gate. Parking is still open.',
+    review: 'Change the gate everywhere it appears, including any captions, labels or narration. Keep Saturday’s hours and leave parking open. The event owner reviews the piece before sharing.'
+  },
+  {
+    title: 'HR',
+    source: [
+      'A fictional inventory assistant posting lists two duties. The employee counts stock and records discrepancies. The schedule is open.',
+      'Draft a short job posting from those facts. Mark the work schedule as pending.'
+    ],
+    update: 'HR confirms the position is weekday mornings. Pay is still open.',
+    review: 'The posting now says weekday mornings and preserves both duties. Refer pay questions to HR before adding a figure. HR checks the posting before it goes out.'
+  },
+  {
+    title: 'Supply chain',
+    source: [
+      'A fictional supplier has confirmed 20 of 30 boxes for Tuesday. The remaining 10 have no delivery date.',
+      'Draft a short status update for the person tracking the order. Show what is due Tuesday and what is still open.'
+    ],
+    update: 'The supplier confirms the remaining 10 boxes for Friday. Friday’s delivery time is open.',
+    review: 'The update shows 20 boxes Tuesday and 10 Friday. It leaves Friday’s time open and tells the order owner what to verify.'
+  },
+  {
+    title: 'Live production',
+    source: [
+      'During a fictional shift, a crew member logged an equipment alert near staging and told the shift lead. Follow-up is unassigned.',
+      'Draft a short note for the maintenance desk. Include the location and what the crew observed.'
+    ],
+    update: 'The shift lead assigned Taylor to follow up and confirmed the alert time was 7:05 AM. Current equipment status is still open.',
+    review: 'The note now includes Taylor and the 7:05 AM alert. It preserves the location and keeps equipment status open for the shift lead to clarify.'
+  },
+  {
+    title: 'Management',
+    source: [
+      'A fictional team wants training for two shifts. One person must stay available for incoming calls. The trainer is free Tuesday or Wednesday.',
+      'Prepare a short brief with two options and one question for the schedule owner.'
+    ],
+    update: 'The trainer is now available Wednesday only. Incoming call coverage is still required.',
+    review: 'The revised options fit Wednesday or show what cannot yet be scheduled. Verify shift and call coverage with the schedule owner.'
+  },
+  {
+    title: 'Bookkeeping',
+    source: [
+      'A fictional supplier statement lists three approved invoices for $125, $95 and $70.',
+      'Draft a short amount-due summary with the amounts counted.'
+    ],
+    update: 'Bookkeeping confirms a $25 supplier credit applies to this batch.',
+    review: 'The three invoices total $290. The approved $25 credit brings the amount due to $265. Show both figures and check the credit reference.'
+  },
+  {
+    title: 'Contracts',
+    source: [
+      'In a fictional agreement, Version A requires 7 days’ notice for a schedule change. Version B requires 14 days’ notice.',
+      'Draft a short comparison and two questions for the contract owner.'
+    ],
+    update: 'The owner shares an excerpt from Version B that says notice must be in writing.',
+    review: 'The comparison includes 14 days and written notice for Version B. The owner checks which version controls and how notice is delivered.'
+  }
+];
+
+const promptLevels = ['Good', 'Better', 'Best'];
+
+const promptExamples = [
+  {
+    tab: 'Meeting notes',
+    title: 'Meeting notes into action items',
+    source: 'Maya will call the carrier by noon Tuesday. The Thursday pickup time is pending. The receiving calendar needs an update after the call.',
+    variants: [
+      ['List the action items from these notes.', 'Names the task and leaves the format open.'],
+      ['Create a short action list from the huddle notes. Include an owner and due date when the notes give one.', 'Adds the details a teammate needs to follow up.'],
+      ['Use only the huddle notes. Make a table with Action, Owner, Due and Status. Enter “Open” for missing owners or dates. Point to the note that supports each confirmed deadline.', 'Makes gaps visible and gives the reader a way to check deadlines.']
+    ]
+  },
+  {
+    tab: 'Hiring',
+    title: 'A dispatch assistant job posting',
+    source: 'The role schedules pickups, checks order numbers and relays timing changes. A draft adds “night shifts and a CDL required.” The role summary confirms neither.',
+    variants: [
+      ['Write a job posting for a dispatch assistant.', 'Names the role and the document.'],
+      ['Draft a short dispatch assistant posting using the three duties in the role summary. Use plain language.', 'Supplies the stated duties and sets a tone.'],
+      ['Check the draft against the role summary and flag unsupported claims. Rewrite the posting in 90 words or fewer using the confirmed duties. End with a short list of details HR needs to confirm.', 'Checks the draft before rewriting and makes the HR review explicit.']
+    ]
+  },
+  {
+    tab: 'Contracts',
+    title: 'Contract cancellation wording',
+    source: 'Version A says either party may cancel with 30 days’ written notice. Version B says the buyer may cancel with 30 days’ written notice.',
+    variants: [
+      ['Compare these two contract excerpts.', 'Identifies the two sources for the comparison.'],
+      ['Compare the cancellation wording in Versions A and B. Quote the words that change.', 'Narrows the task to exact wording the reader can verify.'],
+      ['Using just the excerpts, make a two-row table for who may cancel and the notice period. Quote each version and describe any change. List two questions for the contract owner about details the excerpts leave open.', 'Checks who can act and what notice they must give, then routes open questions to the owner.']
+    ]
+  },
+  {
+    tab: 'Delivery handoff',
+    title: 'A delivery change and shift handoff',
+    source: 'Monday at 10 AM is booked. The supplier asked about Tuesday, 1–3 PM. Receiving has coverage until 2 PM. The shift log says Tuesday at 3 PM is confirmed.',
+    variants: [
+      ['Write to the supplier about changing the delivery.', 'Identifies the audience and the reason for the message.'],
+      ['Ask whether the supplier can deliver Tuesday between 1 and 2 PM. Keep Monday at 10 AM booked until both sides agree.', 'Adds the coverage limit and protects the current booking.'],
+      ['Check the shift log against the booking and receiving coverage. Flag the conflict. Write a supplier reply under 60 words offering Tuesday from 1 to 2 PM as tentative, then write a three-line handoff. Keep Monday booked and state what both sides need to confirm.', 'Applies the same source facts to two drafts with different audiences.']
+    ]
+  },
+  {
+    tab: 'Management',
+    title: 'A training plan for two shifts',
+    source: 'One training option needs 60 minutes and another needs two 30-minute slots. Tuesday has 30 minutes. Wednesday availability and receiving coverage are unconfirmed. A draft books Tuesday for an hour.',
+    variants: [
+      ['Summarize these notes for the manager.', 'Identifies who will use the summary.'],
+      ['Compare the two training options for the manager. Include the known trainer availability.', 'Narrows the brief to the decision and the relevant constraint.'],
+      ['Check the draft against the source and flag the scheduling conflict. Compare the two training options in 100 words or fewer. State which slots are confirmed and what the schedule owner needs to check about Wednesday and receiving coverage before anyone commits.', 'Makes the schedule assumptions and the next human check visible.']
+    ]
+  }
+];
+
+const S = [];
+let section;
+function slide(end, title, kind, data, notes) {
+  S.push({ section, start: end === null ? null : (S.at(-1)?.end ?? '8:00'), end, title, kind, ...data, notes });
+}
+function divider(end, name, lead, notes) {
+  section = name;
+  slide(end, name, 'dark', { lead }, notes);
+}
+function list(end, title, items, notes) {
+  slide(end, title, 'list', { items }, notes);
+}
+function compare(end, title, left, right, notes) {
+  slide(end, title, 'compare', { left, right }, notes);
+}
+function demo(end, title, label, prompt, cue, notes, sampleResult, sampleInput) {
+  slide(end, title, 'demo', { label, prompt, cue, sampleResult, sampleInput }, notes);
+}
+function check(end, title, lead, items, answer, notes) {
+  slide(end, title, 'check', { lead, items, answer }, notes);
+}
+function workRound(end, title, key, notes) {
+  slide(end, title, 'round', { round: rounds[key] }, notes);
+}
+
+const google = {
+  app: 'https://gemini.google.com/',
+  signIn: 'https://support.google.com/gemini/answer/13278668?hl=en',
+  docs: 'https://support.google.com/docs/answer/14206696?hl=en',
+  gmail: 'https://support.google.com/mail/answer/14355636?hl=en',
+  export: 'https://support.google.com/gemini/answer/14184041?hl=en'
+};
+
+section = 'Welcome';
+slide('8:03', 'AI at Reicks', 'cover', {
+  lead: 'Practical AI for everyday work',
+  sub: 'REICKS VIEW FARMS  ·  SESSION 2  ·  8:00 AM–NOON'
+}, 'Before class, ask Reicks which tool and work accounts people may use. Prepare paper copies from Today’s path and give people a paper route. Set up a shared AI-use board with three headings: Green · Try, Yellow · Ask first, Red · Keep out. Capture ideas in general terms throughout class. Pair people around available devices and rotate who drafts and checks after each round.');
+slide('8:06', 'Today’s path', 'agenda', {
+  items: [['8:00', 'Day 1 recap and setup'], ['8:09', 'Optional Gemini tips'], ['8:15', 'Organization and communication'], ['8:50', 'HR and recruitment'], ['9:25', 'Contracts and legal questions'], ['9:50', 'Break'], ['10:00', 'Supply chain'], ['10:27', 'Live production'], ['10:40', 'Management and bookkeeping'], ['11:00', 'Good, Better, Best prompts'], ['11:05', 'Final practice case'], ['11:34', 'Guardrails and Q&A']],
+  practiceSheets: true
+}, 'Preview the progression. Before the break, ask for one thing at a time. After the break, check drafts against a source, repair them within limits and show what still needs checking. Explain that everyone can participate with a shared device or on paper. There are 111 minutes of timed participant practice and review.');
+slide('8:09', 'The Day 1 prompt framework', 'compare', {
+  left: ['What the tool needs', 'Context + Task\nWho is this for? What do you want the tool to do?'],
+  right: ['What you want back', 'Output + Constraints\nWhat should it look like? What details or limits matter?'],
+  cue: 'Quick challenge. Turn “Help with this meeting” into a one-line request for a specific result.'
+}, 'Give everyone 30 seconds to write a one-line prompt. Hear one or two requests. “List the action items from these notes” is a useful starting point. Use paper or a tool Reicks confirms for work. Point to the shared board where people can leave use ideas and questions.');
+
+divider('8:11', 'Optional Gemini tips', 'A short walkthrough for Google Workspace accounts', 'Introduce this as a look at where Gemini features may be available. Reicks access and approved uses are pending confirmation. Show the links or describe the workflow if no Reicks work demo account has been confirmed. Keep real inboxes and files off the projector.');
+slide('8:15', 'Gemini in the browser, Docs and Gmail', 'list', {
+  items: [
+    'Check the active Google account when you open the Gemini web app.',
+    'Try Ask Gemini with fictional material in Docs or Gmail if available.',
+    'Below a reviewed Gemini web response, choose Share & export, then Export to Docs if available. You can also copy and paste.'
+  ],
+  cue: 'Wait for Reicks to confirm access and approved uses before using Gemini for work.',
+  links: [['Open Gemini', google.app], ['Gemini sign-in help', google.signIn], ['Gemini in Docs', google.docs], ['Gemini in Gmail', google.gmail], ['Export to Docs help', google.export]]
+}, 'If Reicks confirms a demo account, verify the profile and review a fictional draft. Show Share & export, then Export to Docs if available, or paste the reviewed text into a blank document. If access is pending, show the help link and give pairs time to write a one-line prompt on paper.');
+
+divider('8:18', 'Organization and communication', 'Turn meeting notes into clear actions and a short update.', 'Preview the two tasks. Ask which takes longer for this group, pulling actions from notes or writing the message that follows. Point out that checking the owner and due date makes the action list usable.');
+const meetingNotes = [
+  'Receiving confirmed the current delivery window.\nA revised delivery time is still pending.',
+  'Sam will call the supplier Thursday morning.\nSomeone needs to update the receiving calendar. Owner and due date are open.'
+];
+compare('8:21', 'The meeting notes',
+  ['Delivery status', meetingNotes[0]],
+  ['Follow-up', meetingNotes[1]],
+  'Display the fictional notes and ask which action appears to be missing details. If using an AI tool, paste the source and the prompt together in a new conversation.');
+demo('8:26', 'Action items from meeting notes', 'Live demo 1 · first draft',
+  'List the action items from these notes.',
+  'Find the note that supports one item in the draft.',
+  'Run the one-line prompt or model the action list on paper. Trace one item back to the notes together. Point out that Thursday morning belongs to the supplier call. In the next round, learners will review a different draft for errors before anyone uses it.',
+  'Sam will call the supplier Thursday morning.\nUpdate the receiving calendar. The notes leave the owner and deadline open.',
+  { label: 'sample notes', text: meetingNotes.join('\n') });
+workRound('8:42', 'Can we use this action list?', 'notes',
+  'Start the timer. At four minutes, move from marking claims to correcting the sample draft. On paper, strike through the unsupported details and write the correction next to them. At minute ten, have pairs swap and point to a source line for an edit. Reveal the review key after the exchange.');
+demo('8:50', 'A short follow-up email', 'Team update',
+  'Write a two-sentence update for the receiving team. The current delivery window stays in place. Sam will check Thursday morning for a possible change.',
+  'Check the date and the commitment. Review the draft before sending.',
+  'Use the first four minutes to hear one correction and one open question from the work round. Use the remaining four minutes for the email example. Show how an update can carry the confirmed status forward without promising a change. Leave the result as a draft.',
+  'Our current delivery window stays in place. Sam will check with the supplier Thursday morning about a possible change.');
+
+divider('8:53', 'HR and recruitment', 'Use confirmed details from the job posting through the first day.', 'Preview the hiring demos and the onboarding round. The demos use a role description. The round asks learners to turn a different set of confirmed facts into instructions a new hire can follow.');
+demo('8:59', 'A job posting draft', 'Live demo 2',
+  'Draft a short job posting for a fictional feed delivery coordinator who schedules deliveries, updates the calendar and communicates changes.',
+  'Compare every duty and requirement with the approved role description before posting.',
+  'Look for added pay, shifts, qualifications or benefits. If the draft adds one, try a separate request: “Remove the pay figure.” Have participants name a detail HR still needs to supply.',
+  'Feed delivery coordinator\nHelp the team schedule feed deliveries, keep the delivery calendar up to date and communicate timing changes to the people affected.');
+demo('9:03', 'A structured interview', 'Facilitator example',
+  'Write two interview questions about how a delivery coordinator checks order details.',
+  'The hiring team reviews the questions and applies the same job-related criteria across candidates.',
+  'Have pairs read one question aloud and name a work example they would listen for. A solo learner can write down what a useful answer would describe. Use sample duties and keep candidate records out of the demo.',
+  'How do you confirm the order number, quantity and delivery time before scheduling a delivery?\nTell us about a time the details didn’t match. What did you check before confirming the order?');
+workRound('9:19', 'A first-day checklist', 'onboarding',
+  'At minute four, have pairs put their checklist in a blank document or on paper. Ask learners to format it so the new hire can use it. Point back to slide 5 if the group can use its Docs workflow. At minute ten, trade checklists and identify a detail HR needs to confirm.');
+compare('9:25', 'HR review points',
+  ['Working draft', 'A role description, question set or blank onboarding checklist from supplied material.'],
+  ['HR review', 'Confirm wording and requirements with HR. Route applicant and employee records through HR. The hiring team evaluates candidates and makes hiring decisions.'],
+  'Ask which confirmed detail makes the checklist usable right away and which missing detail would cause confusion on the first day. Close by naming who would verify the missing information.');
+
+divider('9:28', 'Contracts and legal questions', 'Compare exact wording and prepare questions for the reviewer.', 'Use short fictional clauses. Show how the comparison gives the contract owner or counsel specific questions to resolve.');
+demo('9:33', 'Two versions of a clause', 'Live demo 3 · fictional wording',
+  'What wording was added in Version B?\nA: “Buyer will send notice by email.”\nB: “Buyer will send notice by email and post.”',
+  'Quote the exact words that changed. Point to the version that contains them.',
+  'Have learners say or underline “and post” in Version B. End the demo once everyone has located the exact change. Introduce the next round as preparing questions from one excerpt with missing information.',
+  'Version B adds “and post” after “email.”');
+workRound('9:45', 'Questions for the contract owner', 'contracts',
+  'At minute three, ask pairs to draft questions tied to the excerpt. At minute eight, exchange questions and ask which should go to the owner first. Leave the text-message question for the contract owner or counsel.');
+compare('9:50', 'Contract review points',
+  ['What to bring', 'Bring the exact wording, the referenced section and the question you need answered.'],
+  ['Who reviews it', 'The contract owner or counsel checks the current agreement, interprets the terms and advises on the next step.'],
+  'Ask each pair what it would bring to the owner with its question. Use the signed or authoritative version in real work and confirm permission before using actual contracts or vendor terms.');
+section = 'Break';
+slide('10:00', 'Break', 'dark', { lead: 'Back at 10:00 AM.' }, 'Hold the full ten-minute break. When the group returns, introduce why the next prompts will have more steps.');
+
+section = 'Supply chain';
+compare('10:01', 'Why we’re adding steps',
+  ['What changes', 'Before the break, each prompt asked for one thing. Now we’ll ask the tool to check a draft against the facts, revise it within limits and flag what a person still needs to confirm.'],
+  ['Why it matters', 'The supplier email and shift handoff need to agree. If either says Friday is confirmed while Thursday is still booked, the team could miss the delivery.'],
+  'Ask what could happen if receiving changes the calendar based on a convincing email. Explain the order of the next prompt. Checking first catches the status error, the limits protect the current booking, and the open question tells a person what to confirm before acting.');
+divider('10:02', 'Supply chain', 'Keep messages in sync when the delivery still needs a decision.', 'Fix the supplier email first, then carry the correct status into the shift handoff. In practice, the proposed time runs past receiving coverage and learners will draft a calendar note and a request for the receiving lead.');
+const sampleSupplierEmail = 'Could you deliver Friday between 1 and 3 PM? Thursday at 9 AM stays booked until we agree on a new time. Please let us know what time on Friday would work for you.';
+demo('10:05', 'A delivery email that needs a fix', 'Live demo 4 · check and rewrite',
+  'Source: Thursday at 9 AM is booked. Friday from 1 to 3 PM is proposed. The supplier hasn’t confirmed.\nDraft: “We’ve moved the delivery to Friday at 3 PM.”\n1. Identify what the draft treats as confirmed.\n2. Rewrite it in 50 words or fewer. Ask whether Friday works and keep Thursday booked.\n3. State what we need to confirm before changing the calendar.',
+  'Look for assumptions about whether the booking moved and what time it moved to.',
+  'Let the room predict the errors. Run the sample or ask the room to fix one sentence. Point out how the booking and the open question constrain the rewrite.',
+  'The draft incorrectly treats Friday at 3 PM as booked.\n\n' + sampleSupplierEmail + '\n\nAgree on a new time with the supplier before changing the calendar.');
+demo('10:07', 'A handoff that matches the email', 'Live demo 5 · two linked drafts',
+  'Use the corrected supplier email. Alex will call the supplier Thursday at 8 AM.\n1. Carry the confirmed booking and the open Friday request into a three-line handoff.\n2. Add Alex’s call as the next action.\n3. Verify that the handoff and email give the same booking status.',
+  'Use your corrected email or open the sample email on this slide.',
+  'Stay in the conversation from demo 4, or use the sample email from this slide. In a fresh conversation, copy the prompt with the email. Show how the next shift gets the same booking status and an internal follow-up that the supplier email did not need.',
+  'Booked delivery: Thursday at 9 AM.\nOpen request: Friday between 1 and 3 PM, pending agreement with the supplier.\nNext action: Alex calls the supplier Thursday at 8 AM.',
+  { label: 'sample email', text: sampleSupplierEmail });
+workRound('10:24', 'A delivery request outside coverage', 'deliveryException',
+  'At minute four, have pairs write a calendar note and a short request for the receiving lead. At minute eleven, ask reviewers whether the note could be mistaken for a confirmed booking. Have them locate what Alex needs to confirm before anyone moves the calendar entry.');
+check('10:27', 'When the booking can change', 'Which is enough to move the delivery to Friday?',
+  ['The supplier says Friday works.', 'Receiving confirms coverage through 3 PM.', 'Both sides agree on the time after receiving confirms coverage.'],
+  'Both sides must agree after receiving confirms coverage. Keep Thursday at 9 AM booked until that happens.',
+  'Ask one pair to name the condition that allows a calendar change. The same distinction between what’s known and who can confirm what’s open carries into the production example.');
+
+divider('10:29', 'Live production', 'Map how a report reaches the next shift and what happens if a detail is still open.', 'Explain that a flowchart puts the steps in order and shows where a question sends people down different paths. Use boxes for steps, arrows for order and Yes or No to label the two paths. This case maps communication. Equipment decisions stay with authorized staff and normal procedures.');
+demo('10:31', 'What did the crew actually observe?', 'Fictional production example',
+  'Source: At 6:20 AM a crew member reported a utility gate latch did not catch on the first try. The shift lead was told at 6:25. Repair status is unknown.\nDraft: “The latch was fixed at 6:25.”\n1. List what the notes support.\n2. Identify what the draft claims without support.',
+  'The notes give a notification time. Repair status is still open.',
+  'Ask the group to locate the line that supports each fact. Ask who was told and what is still open. Pairs will turn those same kinds of details into a flowchart in the feed cart case.',
+  'The crew reported the latch didn’t catch on the first try at 6:20 AM and notified the lead at 6:25 AM. The draft’s claim that it was fixed at 6:25 AM has no support. Repair status is open.');
+workRound('10:39', 'Map a live production handoff', 'production',
+  'Give pairs eight minutes. Sketch on paper or use a blank canvas and an approved tool to draft box labels. At minute five, trade diagrams. Ask someone to trace both paths and then show the sample in the review key.');
+check('10:40', 'Which path applies now?', 'The shift lead confirms the cart will stay out of service for the rest of this shift. What goes in the handoff?',
+  ['Status is still pending until the cause is known.', 'The cart stays out of service for the rest of this shift.', 'The cart will be back in service next shift.'],
+  'Follow Yes. Record the shift lead’s update and keep its time limit. The next shift’s status is still open.',
+  'Ask one pair to point to the Yes path on its diagram and read the confirmed update. Ask what can be said about the next shift’s status.');
+
+divider('10:41', 'Management and bookkeeping', 'Choose a decision brief or an invoice check. Both need a reviewable source.', 'Give each role its own task. Managers compare options and identify who confirms staffing. Bookkeeping participants check invoice status and show how they arrived at a total. Invite others to pick the more familiar task.');
+demo('10:44', 'Evidence for a purchase request', 'Management example',
+  'The quote for replacing a label printer is $240. The current printer works. The team expects to save time but hasn’t measured delays.\n1. Separate the quoted cost from the expected benefit.\n2. Ask for one measurement the manager could use to weigh the purchase.',
+  'Ask what information would help the manager judge the expected savings.',
+  'Ask the room for one measurement, then reveal the sample. Point out the difference between a known cost and a benefit that still needs evidence. The practice round asks managers to compare two options against a staffing constraint.',
+  'The replacement is quoted at $240. The time savings are open. How many minutes did the team lose to printer delays last week?');
+check('10:46', 'Which source confirms approval?', 'The invoice register records approvals in this case. What status should you use today?',
+  ['Invoice register: $40 pending.', 'Email: “I expect the $40 invoice to be approved this afternoon.”'],
+  'Use Pending from the register. Once approval is recorded, verify the updated status before including the amount.',
+  'Ask which source supports the status today and what would change it. In the practice round, bookkeepers use recorded statuses, flag a duplicate and verify the total.');
+slide('10:58', 'Choose your practice task', 'choice-round', {
+  choices: [rounds.management, rounds.bookkeeping]
+}, 'Ask pairs to pick Management or Bookkeeping. Read for three minutes, draft for five and peer review for four. Managers compare two options using the inventory count schedule. Bookkeepers check both approval status and duplicates before calculating the total. The two tasks run in parallel. Use the matching printed sheet when working on paper.');
+list('11:00', 'What you would hand over', [
+  'For a decision brief, share the options, the coverage question and who should decide.',
+  'For an invoice check, share the approved total and the entries that support it.'
+], 'Ask one pair from each task to report their source check and what remains open. Carry those checks into Good, Better, Best.');
+
+section = 'Good, Better, Best';
+slide('11:01', 'What each version adds', 'list', {
+  items: [
+    'Good names the task.',
+    'Better adds the details the tool needs.',
+    'Best sets limits and asks for a way to check the result.'
+  ],
+  cue: 'Before you reveal the next version, name one thing you’d add.'
+}, 'Show two cases live in the next four minutes. Meeting notes and delivery handoff give the room examples from each side of the break. All five cases remain available for review. Have pairs choose one change to try in the final case.');
+slide('11:05', 'Five prompt examples', 'prompt-examples', {},
+  'Spend two minutes each on Meeting notes and Delivery handoff. Start with Good, ask what one detail would help, then reveal Better and Best. If the room would benefit from an HR, contract or management case, substitute it for one of those two. Move to the final practice at 11:05.');
+
+divider('11:07', 'Final practice case', 'Draft for your role, revise when facts change and check a partner’s work.', 'Ask pairs to pick a role and try one idea from Good, Better, Best. For Communications, choose one format and sketch it on paper or use an approved tool. Use captions or storyboard panels to keep the work within seven minutes. Keep both versions for the debrief.');
+slide('11:29', 'When the facts change', 'capstone', {}, 'Start the timer after everyone has picked a case. At 7 minutes, have groups reveal the new information and write a follow-up that changes the affected lines, preserves confirmed facts and flags what remains open. On paper, unfold the bottom of the practice sheet. At 13 minutes, swap drafts and audit the change against both sources.');
+slide('11:34', 'Pair debrief', 'question', {
+  text: 'What did you change, and why?',
+  sub: 'Point to the new fact and name who checks the final draft.',
+  cue: 'Working alone? Write one sentence on what changed and who should review it.'
+}, 'Take two reports from different roles. For each, hear the initial decision, what changed after the update and the person who checks the final draft. Ask a third group to share one source check if time permits.');
+
+divider('11:36', 'Guardrails and Q&A', 'Check what you can use, what you can share and who reviews the result.', 'Frame these as working questions for Reicks. Record questions about tools, data and review for the people who can answer them. The final eight minutes are reserved for questions.');
+workRound('11:44', 'Three requests before you paste', 'guardrails',
+  'Start the timer. Give participants two minutes to think individually, three to compare, then three to share. Ask which requests fit Try, Ask first or Keep out and record the reasons. Read the review key after hearing the room. Capture open Reicks policy questions on the shared board.');
+compare('11:48', 'Before a draft goes out',
+  ['Check the source', 'Verify names, dates, numbers and commitments against the source. Flag any remaining assumptions.'],
+  ['Check who owns the decision', 'Ask the person responsible for the work to confirm anything that affects people, money, safety or operations.'],
+  'Move from what participants can put into a tool to what can leave as a draft. Ask which case they would hand to a reviewer and what source they would include. Capture unresolved decisions for the closing Q&A.');
+slide('11:52', 'One task for next week', 'question', {
+  text: 'Where could AI help with a first draft?',
+  sub: 'Name the task, the information you can use and who will check the result.'
+}, 'Give participants a minute to write their own example. Invite two people to share. Capture open questions about access, information, review or ownership for the relevant Reicks team.');
+slide('12:00', 'Questions to take back to Reicks', 'list', {
+  items: [
+    'Which tools and accounts are approved for work?',
+    'What work information can we use with them?',
+    'Who reviews outputs before we share them or act?'
+  ],
+  cue: 'Log ideas on the board under Green · Try, Yellow · Ask first, or Red · Keep out. Give each open question an owner.'
+}, 'Take questions for the full eight minutes. Review the shared board and capture one next step and an owner for each unresolved question, when known. Save the group’s general use ideas and questions for Reicks leadership and HR. Close the scheduled workshop at noon.');
+
+section = 'After class';
+slide(null, 'More practice by role', 'practice-library', {
+  groups: [
+    ['Organization', [
+      ['Pull key points from a long email', 'Summarize this email in three bullets for the office team. The printer service moved to Thursday at 2 PM. Use the front printer meanwhile. Supply orders stay on Friday. The service contact will confirm how long the visit will take.'],
+      ['Turn rough notes into an agenda', 'Make a 20-minute meeting agenda from these notes: review the delivery calendar, assign the inventory count lead, and agree who updates the office team.'],
+      ['Adapt a message for three audiences', 'An open house starts Saturday at 9 AM at the west gate. Parking is pending. Draft a short update for employees, managers and the outside event vendor using the same facts.']
+    ]],
+    ['HR', [
+      ['Turn a handbook excerpt into an FAQ', 'Create two questions and answers from this fictional handbook note. New hires collect a badge from the office. They bring the badge to orientation. HR will confirm orientation room assignments.'],
+      ['Write manager talking points', 'Draft three talking points for a manager to share with employees. Tuesday’s orientation moved to 10 AM in Room B. Bring the same materials. The facilitator stays the same.']
+    ]],
+    ['Contracts', [
+      ['Summarize a clause in plain language', 'Summarize this fictional clause in one plain-language sentence: “The buyer shall notify the designated contact in writing two business days before rescheduling.” Keep the timing, written notice and recipient. Check the summary against the clause and route interpretation to the contract owner.']
+    ]],
+    ['Supply chain', [
+      ['Plan work with dependencies', 'Build a work plan for a Friday 2 PM pickup. Count boxes before printing labels or sending the carrier the total. Clear a space and print labels before staging. Show what can happen in parallel and flag any missing owner.']
+    ]],
+    ['Live production', [
+      ['Prepare for a maintenance call', 'In a fictional report, a display went blank twice near staging. Make a list of observations to collect before calling maintenance. Mark unknown details as open. Keep the task to preparing the report.'],
+      ['Turn a supplied procedure into a checklist', 'Convert this approved reporting procedure for a fictional site into a checklist. Log the date and time, copy the displayed code, notify the shift lead, then record who acknowledged the report. Preserve the steps and their order.']
+    ]],
+    ['Management', [
+      ['Compare approaches and risks', 'A team wants fewer surprise supply shortages and already has a paper log and a shared sheet. Ask what information is missing, then outline three ways to improve tracking. Give one tradeoff and one risk for each.'],
+      ['Turn a report into questions', 'A fictional weekly report says five shipments were late and lists no causes. Give three questions a manager should ask before proposing a change.']
+    ]],
+    ['Bookkeeping', [
+      ['Build and explain a formula', 'In a fictional sheet, amounts are in B2:B4 and approval status is in C2:C4. The rows are $120 Approved, $80 Pending and $210 Approved, with no duplicates. Give a formula to total only Approved rows. Explain how it works and show the expected result.']
+    ]]
+  ]
+}, 'Offer these fictional examples as take-home practice or as a reference when someone asks about a specific workflow. Ask participants to compare each output with its source and name the person who would review it.');
+
+slide(null, 'Make a short video with Veo', 'demo', {
+  label: 'Bonus · one playful scene',
+  prompt: 'Make an 8-second stop-motion clip. A tiny clay pig in yellow rain boots hops over one puddle beside a red toy barn. Use a low camera and soft morning light. Add one splash and quiet birds. Keep the same pig and boots throughout. No text or logos.',
+  cue: 'If Reicks confirms Flow access, start a project, choose Video and Veo 3.1 Lite, and generate one clip. Watch it and pick one thing to change.',
+  links: [['Open Google Flow', 'https://flow.google.com/'], ['Google Flow video help', 'https://support.google.com/flow/answer/16353334?hl=en']]
+}, 'Offer this as a 5–8 minute bonus after class. Check that Reicks has approved Flow on the demo account and that credits are available. In Flow, select Video, Veo 3.1 Lite, 8 seconds and one output. Read the prompt aloud and generate the clip. Check the action, continuity and sound. Ask the room to change one detail for a second attempt if time and credits allow. Without Flow access, have pairs sketch the first and last frames and revise the prompt. Use the fictional scene and text only.');
+
+
+const $ = id => document.getElementById(id);
+const stage = $('stage');
+const presenterMode = new URLSearchParams(location.search).get('presenter') === '1';
+let connectedPresenter = null;
+let slideIndex = 0;
+let toastTimer;
+let printSelection = 'deck';
+const roundTimers = new Map();
+const selectedCases = new Map();
+const selectedPromptLevels = new Map();
+const capstoneRounds = capstoneCases.map(caseData => ({
+  output: 'A first draft, a revision and two source checks.',
+  ...caseData,
+  steps: capstoneSteps,
+  starter: capstoneRevision
+}));
+
+function esc(text) {
+  const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return String(text).replace(/[&<>"']/g, char => entities[char]);
+}
+const lines = text => esc(text).replace(/\n/g, '<br>');
+const range = s => s.end === null ? 'Optional' : s.start + '–' + s.end;
+const pointList = items => '<ul class="point-list">' +
+  items.map(item => '<li>' + esc(item) + '</li>').join('') + '</ul>';
+const links = items => '<div class="resource-links">' + items.map(
+  ([label, url]) => '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + '</a>'
+).join('') + '</div>';
+const column = ([title, text]) => '<div class="col"><h3>' + esc(title) + '</h3><p>' + lines(text) + '</p></div>';
+const paragraph = (className, text) => '<p class="' + className + '">' + esc(text) + '</p>';
+const heading = title => '<h2 tabindex="-1">' + esc(title) + '</h2>';
+const promptSurface = prompt => '<div class="prompt-surface">' + esc(prompt) + '</div>';
+const copyButton = '<button class="action-button copy-prompt" type="button" data-copy>Copy prompt</button>';
+
+const workDuration = steps => steps.reduce((total, [minutes]) => total + minutes, 0);
+const clockLabel = seconds => Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+const shortList = items => '<ul class="work-source">' + items.map(item => '<li>' + esc(item) + '</li>').join('') + '</ul>';
+const spreadsheetText = rows => rows.map(row => row.join('\t')).join('\n');
+const roundSource = round => round.source.join('\n') + (round.sheet ? '\n\n' + spreadsheetText(round.sheet) : '');
+
+const selectedCase = s => selectedCases.get(s) ?? 0;
+const availableRounds = s => s.kind === 'capstone' ? capstoneRounds : s.choices ?? [];
+const currentRound = (s = S[slideIndex]) => s.round ?? availableRounds(s)[selectedCase(s)];
+
+function choiceButtons(labels, selected, attribute, target, groupLabel, className) {
+  return '<div class="choice-row ' + className + '" role="group" aria-label="' + esc(groupLabel) + '">' +
+    labels.map((label, index) => '<button type="button"' + (index === selected ? ' class="active"' : '') +
+      ' data-' + attribute + '="' + index + '" aria-controls="' + target +
+      '" aria-pressed="' + (index === selected) + '">' + esc(label) + '</button>').join('') +
+    '</div>';
+}
+
+function activateChoice(button, selector) {
+  for (const option of stage.querySelectorAll(selector)) {
+    const active = option === button;
+    option.classList.toggle('active', active);
+    option.setAttribute('aria-pressed', String(active));
+  }
+}
+
+function disclosure(title, text, { copyPrompt, shortcut, extraMarkup = '' } = {}) {
+  return '<details class="work-reveal" name="round-disclosure"' +
+    (shortcut ? ' data-round-detail="' + shortcut + '"' : '') + '><summary>' + esc(title) + '</summary>' +
+    paragraph('work-detail', text) + extraMarkup +
+    (copyPrompt ? '<button class="chip-button" type="button" data-copy-starter>' +
+      (copyPrompt === 'case' ? 'Copy prompt with case' : 'Copy revision prompt') + '</button>' : '') +
+    '</details>';
+}
+
+function sampleFlow(flow) {
+  return '<figure class="work-flow"><figcaption>Sample process flow</figcaption>' +
+    '<ol class="flow-steps">' + flow.steps.map(step => '<li>' + esc(step) + '</li>').join('') + '</ol>' +
+    '<ul class="flow-paths">' + flow.paths.map(([answer, step]) =>
+      '<li><strong>' + esc(answer) + '</strong> ' + esc(step) + '</li>'
+    ).join('') + '</ul></figure>';
+}
+
+function invoiceTable([headers, ...rows]) {
+  return '<table class="practice-data" aria-label="Fictional invoices"><thead><tr>' +
+    headers.map(header => '<th scope="col">' + esc(header) + '</th>').join('') + '</tr></thead><tbody>' +
+    rows.map(row => '<tr>' + row.map(value => '<td>' + esc(value) + '</td>').join('') + '</tr>').join('') +
+    '</tbody></table>';
+}
+
+const roundTitle = (s, round) => round.title ? s.title + ' · ' + round.title : s.title;
+
+function workPrint(s, round, worksheet = false) {
+  const starter = worksheet && round.starter ? '<div class="worksheet-starter"><strong>' +
+      (round.update ? 'Optional revision prompt' : 'Optional prompt starter') +
+      '</strong>' + paragraph('', round.starter) + '</div>' : '';
+  return heading(roundTitle(s, round)) + paragraph('work-output', round.output) +
+    workPlan(round, round.update ? starter : '') + (round.update ? '' : starter) +
+    (worksheet ? '<div class="worksheet-writing"><strong>Draft, revision and checks</strong>' +
+      '<small class="worksheet-key-note">Find the matching review key at the end of this packet.</small></div>' : '') +
+    (round.update ? '<div class="worksheet-update"><strong>Fold here and reveal at minute 7</strong>' +
+      paragraph('', round.update) + '</div>' : '');
+}
+
+function workPlan(round, printedStarter = '') {
+  return '<div class="work-grid"><div class="work-column"><h3>Fictional case</h3>' + shortList(round.source) +
+    (round.sheet ? invoiceTable(round.sheet) : '') + printedStarter +
+    '</div><div class="work-column"><h3>Work plan</h3><ol class="work-steps">' + round.steps.map(
+      ([minutes, task, solo]) => '<li><b>' + minutes + ' min</b><div>' + esc(task) +
+        (solo ? '<span class="solo-step"><strong>Working alone?</strong> ' + esc(solo) + '</span>' : '') +
+        '</div></li>'
+    ).join('') + '</ol></div></div>';
+}
+
+function workScreen(round, copyCase) {
+  const minutes = workDuration(round.steps);
+  return paragraph('work-output', round.output) +
+    '<div class="work-shortcuts">' +
+    (round.update ? '<button type="button" data-round-shortcut="update">Find new information</button>' : '') +
+    '<button type="button" data-round-shortcut="review">Find review key</button></div>' +
+    workPlan(round) +
+    '<div class="work-controls"><div class="round-clock">' +
+    '<output id="roundTime" role="timer" aria-label="Time remaining">' + clockLabel(minutes * 60) + '</output>' +
+    '<button class="action-button" type="button" data-round-clock>Start timer</button>' +
+    '<button class="chip-button" type="button" data-round-reset hidden>Reset</button>' +
+    '</div>' + (copyCase ? '<button class="chip-button" type="button" data-copy-case>Copy case</button>' : '') +
+    (round.sheet ? '<button class="chip-button" type="button" data-copy-spreadsheet>Copy spreadsheet data</button>' : '') + '</div>' +
+    '<div class="work-disclosures">' +
+    (round.update ? disclosure('New information · after 7 min', round.update, { shortcut: 'update' }) : '') +
+    (round.starter ? disclosure(round.update ? 'Revision prompt' : 'Prompt starter', round.starter,
+      { copyPrompt: round.update ? 'revision' : 'case' }) : '') +
+    disclosure('Review key', round.review, { shortcut: 'review', extraMarkup: round.flow ? sampleFlow(round.flow) : '' }) +
+    (round.extra ? disclosure('Finished early?', round.extra) : '') +
+    '</div>';
+}
+
+function demoSamples(s, forPrint) {
+  const samples = [{ label: 'sample result', text: s.sampleResult }];
+  if (s.sampleInput) samples.unshift(s.sampleInput);
+  return '<div class="demo-samples">' + samples.map(({ label, text }) => {
+    const body = paragraph('work-detail demo-detail', text);
+    if (forPrint) {
+      const printLabel = label[0].toUpperCase() + label.slice(1);
+      return '<section class="demo-sample"><h3>' + esc(printLabel) + '</h3>' + body + '</section>';
+    }
+    return '<details class="demo-sample"><summary>Show ' + esc(label) + '</summary>' + body + '</details>';
+  }).join('') + '</div>';
+}
+
+function examplePrompt([prompt, change]) {
+  return promptSurface(prompt) + paragraph('prompt-caption example-change', change);
+}
+
+function exampleMarkup(example) {
+  const level = selectedPromptLevels.get(example) ?? 0;
+  return '<h3 class="example-title">' + esc(example.title) + '</h3>' + paragraph('example-source', example.source) +
+    choiceButtons(promptLevels, level, 'prompt-level', 'examplePrompt', 'Prompt version', 'example-levels') +
+    '<div id="examplePrompt" aria-live="polite" aria-atomic="true">' + examplePrompt(example.variants[level]) +
+    '</div><button type="button" class="chip-button example-copy" data-copy-example>Copy prompt with case</button>';
+}
+
+function printExample(s, example) {
+  return '<section class="slide prompt-example">' + paragraph('chapter-label', s.section) + heading(example.title) +
+    paragraph('example-source', example.source) + '<div class="example-print">' +
+    example.variants.map(([prompt, change], index) => '<section><h3>' + esc(promptLevels[index]) +
+      '</h3>' + paragraph('example-print-prompt', prompt) + paragraph('example-change', change) + '</section>'
+    ).join('') + '</div></section>';
+}
+
+function practicePrompts(prompts, forPrint) {
+  return prompts.map(([title, prompt], index) => '<div class="library-prompt"><strong>' + esc(title) + '</strong>' +
+    paragraph('', prompt) + (forPrint ? '' : '<button type="button" class="chip-button" data-copy-library="' + index +
+      '" aria-label="Copy prompt: ' + esc(title) + '">Copy prompt</button>') + '</div>').join('');
+}
+
+function slideMarkup(s, forPrint = false) {
+  const label = paragraph('chapter-label', s.kind === 'cover' ? 'Session 2' : s.section);
+  let className = 'slide';
+  let body;
+  switch (s.kind) {
+    case 'cover':
+    case 'dark':
+      className += s.kind === 'cover' ? ' dark cover' : ' dark';
+      body = (s.kind === 'cover' ? '<div class="field-art" aria-hidden="true"></div>' : '') +
+        label + '<h1 tabindex="-1">' + esc(s.title) + '</h1><div class="hero-rule" aria-hidden="true"></div>' +
+        paragraph('lead', s.lead) + (s.sub ? paragraph('subline', s.sub) : '');
+      break;
+    case 'agenda':
+      body = label + heading(s.title) + '<div class="agenda">' + s.items.map(
+        ([time, item]) => '<div class="agenda-item"><b>' + esc(time) + '</b><span>' + esc(item) + '</span></div>'
+      ).join('') + '</div>' +
+        (s.practiceSheets && !forPrint ? '<div class="agenda-actions">' +
+          '<button type="button" class="chip-button" data-print-practice>Print practice sheets</button>' +
+          S.flatMap((extra, index) => extra.end === null ? '<a href="#slide=' + (index + 1) + '" class="chip-button">' +
+            esc(extra.title) + '</a>' : []).join('') + '</div>' : '');
+      break;
+    case 'compare':
+      body = label + heading(s.title) + '<div class="two-col">' + column(s.left) + column(s.right) + '</div>' +
+        (s.cue ? paragraph('prompt-caption', s.cue) : '');
+      break;
+    case 'list':
+      body = label + heading(s.title) + pointList(s.items) + (s.cue ? paragraph('prompt-caption', s.cue) : '') +
+        (s.links ? links(s.links) : '');
+      break;
+    case 'demo':
+      if (s.prompt.includes('\n1. ')) className += ' stepped-demo';
+      body = label + '<span class="demo-phase">' + esc(s.label) + '</span>' + heading(s.title) +
+        '<div class="demo-input">' + paragraph('prompt-label', 'WHAT I WOULD TYPE') +
+        promptSurface(s.prompt) + '<div class="prompt-actions">' + copyButton +
+        (s.sampleInput ? '<button class="chip-button" type="button" data-copy="with-input">Copy with ' +
+          esc(s.sampleInput.label) + '</button>' : '') +
+        '</div></div>' + paragraph('prompt-caption', s.cue) + (s.sampleResult ? demoSamples(s, forPrint) : '') +
+        (s.links ? links(s.links) : '');
+      break;
+    case 'practice-library':
+      className += ' practice-library';
+      body = label + heading(s.title);
+      if (forPrint) {
+        body += '<div class="practice-print">' + s.groups.map(([group, prompts]) =>
+          '<section><h3>' + esc(group) + '</h3>' + practicePrompts(prompts, true) + '</section>').join('') + '</div>';
+      } else {
+        body += choiceButtons(s.groups.map(([group]) => group), selectedCase(s), 'library', 'libraryPanel',
+          'Choose a work area', 'case-buttons') +
+          '<div id="libraryPanel">' + practicePrompts(s.groups[selectedCase(s)][1], false) + '</div>';
+      }
+      break;
+    case 'prompt-examples':
+      className += ' prompt-example';
+      body = label + heading(s.title) +
+        choiceButtons(promptExamples.map(example => example.tab), selectedCase(s), 'example', 'exampleCase',
+          'Choose an example', 'case-buttons example-cases') +
+        '<div id="exampleCase">' + exampleMarkup(promptExamples[selectedCase(s)]) + '</div>';
+      break;
+    case 'check':
+      body = label + heading(s.title) + paragraph('lead review-lead', s.lead) + pointList(s.items);
+      if (!forPrint) {
+        body += '<details class="review-details"><summary class="action-button">Check your review</summary>' +
+          paragraph('response', s.answer) + '</details>';
+      }
+      break;
+    case 'round':
+      className += ' work-slide';
+      body = label + (forPrint ? workPrint(s, s.round) : heading(s.title) + workScreen(s.round, s.round.copy !== false));
+      break;
+    case 'choice-round':
+    case 'capstone':
+      className += ' work-slide capstone';
+      if (s.kind === 'capstone' && forPrint) {
+        body = label + heading(s.title) + '<div class="practice-print">' + capstoneCases.map(caseData =>
+          '<section><h3>' + esc(caseData.title) + '</h3>' + paragraph('', caseData.source.join(' ')) +
+          paragraph('', 'New information · ' + caseData.update) + '</section>'
+        ).join('') + '</div>';
+        break;
+      }
+      body = label + heading(s.title) +
+        choiceButtons(availableRounds(s).map(round => round.title), selectedCase(s), 'case', 'casePanel',
+          'Choose a practice case', 'case-buttons') +
+        '<div id="casePanel" class="scenario-panel">' + workScreen(currentRound(s), true) + '</div>';
+      break;
+    case 'question':
+      body = label + heading(s.title) + paragraph('large-question', s.text) + paragraph('question-sub', s.sub) +
+        (s.cue ? paragraph('prompt-caption', s.cue) : '');
+      break;
+  }
+  return '<section class="' + className + '">' + body + '</section>';
+}
+
+function showToast(message) {
+  const toast = $('toast');
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.add('show');
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+async function copyText(button, prompt, label) {
+  try {
+    await navigator.clipboard.writeText(prompt);
+  } catch {
+    const field = document.createElement('textarea');
+    field.className = 'visually-hidden';
+    field.value = prompt;
+    field.setAttribute('aria-label', 'Prompt text');
+    button.after(field);
+    field.select();
+    if (!document.execCommand('copy')) {
+      field.addEventListener('blur', () => field.remove(), { once: true });
+      showToast(label + ' selected. Use Ctrl+C or Command+C to copy.');
+      return;
+    }
+    field.remove();
+    button.focus({ preventScroll: true });
+  }
+  showToast(label + ' copied');
+}
+
+function updateRoundClock() {
+  const clock = $('roundTime');
+  if (!clock) return;
+  const round = currentRound();
+  const duration = workDuration(round.steps) * 60;
+  const timer = roundTimers.get(slideIndex);
+  const seconds = timer?.until ? Math.max(0, Math.ceil((timer.until - Date.now()) / 1000)) :
+    timer?.remaining ?? duration;
+  if (timer?.until && seconds === 0) {
+    timer.until = null;
+    timer.remaining = 0;
+    showToast('Time is up');
+  }
+  const nextTime = clockLabel(seconds);
+  if (clock.value !== nextTime) clock.value = nextTime;
+  const start = stage.querySelector('[data-round-clock]');
+  const nextLabel = timer?.until ? 'Pause' : seconds > 0 && seconds < duration ? 'Resume' : 'Start timer';
+  if (start.textContent !== nextLabel) start.textContent = nextLabel;
+  stage.querySelector('[data-round-reset]').hidden = !timer;
+  const elapsed = duration - seconds;
+  let cutoff = 0;
+  for (const [index, item] of [...stage.querySelectorAll('.work-steps li')].entries()) {
+    const beginning = cutoff;
+    cutoff += round.steps[index][0] * 60;
+    item.toggleAttribute('data-current', Boolean(timer && elapsed >= beginning && elapsed < cutoff));
+  }
+}
+
+function toggleRoundClock() {
+  const duration = workDuration(currentRound().steps) * 60;
+  const previous = roundTimers.get(slideIndex);
+  if (previous?.until) {
+    roundTimers.set(slideIndex, { remaining: Math.max(0, Math.ceil((previous.until - Date.now()) / 1000)) });
+  } else {
+    const remaining = previous?.remaining || duration;
+    roundTimers.set(slideIndex, { until: Date.now() + remaining * 1000 });
+  }
+  updateRoundClock();
+}
+
+function hashIndex() {
+  const match = location.hash.match(/^#slide=(\d+)$/);
+  const index = match ? Number(match[1]) - 1 : 0;
+  return Math.max(0, Math.min(index, S.length - 1));
+}
+
+function drawPresenter(s) {
+  $('presenterTitle').textContent = s.title;
+  $('presenterMeta').textContent = s.section + ' · ' + range(s);
+  $('presenterNotes').textContent = s.notes;
+  $('presenterNext').textContent = S[slideIndex + 1]?.title ?? 'End of session';
+  $('presenterCount').textContent = (slideIndex + 1) + ' / ' + S.length;
+  $('presenterPrev').disabled = slideIndex === 0;
+  $('presenterNextButton').disabled = slideIndex === S.length - 1;
+}
+
+function render({ focus = false } = {}) {
+  const s = S[slideIndex];
+  if (presenterMode) {
+    drawPresenter(s);
+    return;
+  }
+  stage.innerHTML = slideMarkup(s);
+  stage.scrollTop = 0;
+  updateRoundClock();
+  $('chapter').textContent = s.section;
+  $('timing').textContent = range(s);
+  $('timing').classList.add('timing');
+  $('slideNumber').textContent = String(slideIndex + 1).padStart(2, '0') + ' / ' + S.length;
+  $('prev').disabled = slideIndex === 0;
+  $('next').disabled = slideIndex === S.length - 1;
+  $('progress').style.width = ((slideIndex + 1) / S.length * 100) + '%';
+  $('notesTime').textContent = range(s);
+  $('notesSlide').textContent = s.section;
+  $('notesText').textContent = s.notes;
+  for (const button of $('outlineItems').querySelectorAll('[data-slide]')) {
+    const active = Number(button.dataset.slide) === slideIndex;
+    button.classList.toggle('active', active);
+    if (active) button.setAttribute('aria-current', 'true');
+    else button.removeAttribute('aria-current');
+  }
+  if (focus) stage.querySelector('h1, h2')?.focus({ preventScroll: true });
+  if (connectedPresenter && !connectedPresenter.closed) {
+    connectedPresenter.postMessage({ type: 'reicks-session2-slide', index: slideIndex }, '*');
+  }
+}
+
+function goTo(index, focus = false) {
+  if (!Number.isInteger(index) || index < 0 || index >= S.length || index === slideIndex) return;
+  if (presenterMode && opener && !opener.closed) {
+    opener.postMessage({ type: 'reicks-session2-go', index }, '*');
+  } else {
+    history.pushState(null, '', '#slide=' + (index + 1));
+    slideIndex = index;
+    render({ focus });
+  }
+}
+
+function setUpDrawer(dialogId, buttonId) {
+  const dialog = $(dialogId);
+  const button = $(buttonId);
+  button.addEventListener('click', () => {
+    dialog.showModal();
+    button.setAttribute('aria-expanded', 'true');
+    dialog.querySelector('[aria-current="true"]')?.scrollIntoView({ block: 'nearest' });
+  });
+  dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => button.setAttribute('aria-expanded', 'false'));
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right) dialog.close();
+  });
+}
+
+function preparePrint() {
+  const printDeck = $('printDeck');
+  if (printDeck.dataset.selection === printSelection) return;
+  printDeck.dataset.selection = printSelection;
+  if (printSelection === 'deck') {
+    printDeck.innerHTML = S.map(s => {
+      if (s.kind === 'prompt-examples') return promptExamples.map(example => printExample(s, example)).join('');
+      if (s.kind === 'choice-round') {
+        return s.choices.map(round => '<section class="slide work-slide">' +
+          paragraph('chapter-label', s.section) + workPrint(s, round) + '</section>').join('');
+      }
+      return slideMarkup(s, true);
+    }).join('');
+    return;
+  }
+  const practice = S.flatMap(s => (s.round ? [s.round] : availableRounds(s)).map(round => [s, round]));
+  const sheets = practice.map(([s, round]) =>
+    '<section class="slide worksheet">' + paragraph('chapter-label', 'Reicks View Farms · Session 2 · ' + workDuration(round.steps) + ' min') +
+    workPrint(s, round, true) + '</section>'
+  ).join('');
+  let keys = '';
+  for (let offset = 0; offset < practice.length; offset += 5) {
+    keys += '<section class="slide print-review-sheet">' + paragraph('chapter-label', 'Reicks View Farms · Session 2') +
+      heading('Review keys') + paragraph('print-review-intro', 'Compare these notes with your work after you finish each case.') +
+      '<div class="print-review-list">' + practice.slice(offset, offset + 5).map(([s, round]) =>
+        '<section><h3>' + esc(roundTitle(s, round)) + '</h3>' + paragraph('', round.review) +
+        (round.flow ? sampleFlow(round.flow) : '') + '</section>'
+      ).join('') + '</div></section>';
+  }
+  printDeck.innerHTML = sheets + keys;
+}
+
+function printPresentation(selection) {
+  printSelection = selection;
+  preparePrint();
+  window.print();
+}
+
+function configureDeck() {
+  $('home').addEventListener('click', () => goTo(0, true));
+  $('prev').addEventListener('click', () => goTo(slideIndex - 1));
+  $('next').addEventListener('click', () => goTo(slideIndex + 1));
+  $('outlineItems').innerHTML = S.map((s, index) =>
+    (s.section !== S[index - 1]?.section ? '<h3 class="outline-section">' + esc(s.section) + '</h3>' : '') +
+    '<button class="outline-item" type="button" data-slide="' + index + '"><span>' +
+    esc(range(s)) + '</span>' + esc(s.title) + '</button>'
+  ).join('');
+  $('outlineItems').addEventListener('click', event => {
+    const button = event.target.closest('button[data-slide]');
+    if (!button) return;
+    $('outline').close();
+    goTo(Number(button.dataset.slide), true);
+  });
+  setUpDrawer('outline', 'outlineButton');
+  setUpDrawer('notes', 'notesButton');
+  stage.addEventListener('click', event => {
+    const copy = event.target.closest('[data-copy]');
+    if (copy) {
+      const s = S[slideIndex];
+      const prompt = copy.dataset.copy === 'with-input' ? s.prompt + '\n\n' + s.sampleInput.text : s.prompt;
+      void copyText(copy, prompt, 'Prompt');
+      return;
+    }
+    const library = event.target.closest('[data-library]');
+    if (library) {
+      const s = S[slideIndex];
+      const group = Number(library.dataset.library);
+      selectedCases.set(s, group);
+      activateChoice(library, '[data-library]');
+      $('libraryPanel').innerHTML = practicePrompts(s.groups[group][1], false);
+      return;
+    }
+    const copyLibrary = event.target.closest('[data-copy-library]');
+    if (copyLibrary) {
+      const s = S[slideIndex];
+      const [, prompt] = s.groups[selectedCase(s)][1][Number(copyLibrary.dataset.copyLibrary)];
+      void copyText(copyLibrary, prompt, 'Prompt');
+      return;
+    }
+    const exampleButton = event.target.closest('[data-example]');
+    if (exampleButton) {
+      selectedCases.set(S[slideIndex], Number(exampleButton.dataset.example));
+      activateChoice(exampleButton, '[data-example]');
+      $('exampleCase').innerHTML = exampleMarkup(promptExamples[selectedCase(S[slideIndex])]);
+      return;
+    }
+    const levelButton = event.target.closest('[data-prompt-level]');
+    if (levelButton) {
+      const example = promptExamples[selectedCase(S[slideIndex])];
+      const level = Number(levelButton.dataset.promptLevel);
+      selectedPromptLevels.set(example, level);
+      activateChoice(levelButton, '[data-prompt-level]');
+      $('examplePrompt').innerHTML = examplePrompt(example.variants[level]);
+      return;
+    }
+    const copyExample = event.target.closest('[data-copy-example]');
+    if (copyExample) {
+      const example = promptExamples[selectedCase(S[slideIndex])];
+      const [prompt] = example.variants[selectedPromptLevels.get(example) ?? 0];
+      void copyText(copyExample, prompt + '\n\nFictional case\n' + example.source, 'Prompt');
+      return;
+    }
+    const copyCase = event.target.closest('[data-copy-case]');
+    if (copyCase) {
+      const round = currentRound();
+      void copyText(copyCase, roundSource(round) + '\n\n' + round.output, 'Case');
+      return;
+    }
+    const copySpreadsheet = event.target.closest('[data-copy-spreadsheet]');
+    if (copySpreadsheet) {
+      void copyText(copySpreadsheet, spreadsheetText(currentRound().sheet), 'Spreadsheet data');
+      return;
+    }
+    const starter = event.target.closest('[data-copy-starter]');
+    if (starter) {
+      const round = currentRound();
+      const prompt = round.update ? round.starter : round.starter + '\n\n' + roundSource(round);
+      void copyText(starter, prompt, 'Prompt');
+      return;
+    }
+    if (event.target.closest('[data-round-clock]')) {
+      toggleRoundClock();
+      return;
+    }
+    if (event.target.closest('[data-round-reset]')) {
+      roundTimers.delete(slideIndex);
+      updateRoundClock();
+      stage.querySelector('[data-round-clock]').focus();
+      return;
+    }
+    if (event.target.closest('[data-print-practice]')) {
+      printPresentation('practice');
+      return;
+    }
+    const shortcut = event.target.closest('[data-round-shortcut]');
+    if (shortcut) {
+      const control = stage.querySelector('[data-round-detail="' + shortcut.dataset.roundShortcut + '"] summary');
+      control.focus({ preventScroll: true });
+      control.scrollIntoView({ block: 'center' });
+      return;
+    }
+    const button = event.target.closest('[data-case]');
+    if (!button) return;
+    selectedCases.set(S[slideIndex], Number(button.dataset.case));
+    activateChoice(button, '[data-case]');
+    $('casePanel').innerHTML = workScreen(currentRound(), true);
+    updateRoundClock();
+  });
+  stage.addEventListener('toggle', event => {
+    if (event.target.matches('.work-reveal[open], details.demo-sample[open]')) {
+      event.target.scrollIntoView({ block: 'nearest' });
+    }
+  }, true);
+  $('presenterButton').addEventListener('click', () => {
+    const url = new URL(location.href);
+    url.searchParams.set('presenter', '1');
+    url.hash = 'slide=' + (slideIndex + 1);
+    connectedPresenter = window.open(url.href, 'ReicksSession2Presenter', 'popup,width=690,height=760');
+    if (!connectedPresenter) showToast('Allow pop-ups or open Facilitator for the notes.');
+    else connectedPresenter.focus();
+  });
+  addEventListener('beforeprint', preparePrint);
+  addEventListener('afterprint', () => { printSelection = 'deck'; });
+  $('printButton').addEventListener('click', () => printPresentation('deck'));
+  setInterval(updateRoundClock, 250);
+}
+
+addEventListener('message', event => {
+  const { type, index } = event.data ?? {};
+  if (!Number.isInteger(index) || index < 0 || index >= S.length) return;
+  if (presenterMode && event.source === opener && type === 'reicks-session2-slide') {
+    slideIndex = index;
+    history.replaceState(null, '', '#slide=' + (index + 1));
+    render();
+  } else if (!presenterMode && event.source === connectedPresenter && type === 'reicks-session2-go') {
+    goTo(index);
+  }
+});
+
+addEventListener('hashchange', () => {
+  const index = hashIndex();
+  if (index === slideIndex) return;
+  slideIndex = index;
+  render();
+});
+
+addEventListener('keydown', event => {
+  if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey ||
+    document.querySelector('dialog[open]') || event.target.closest?.('input, textarea, [contenteditable]')) return;
+  const destinations = { ArrowLeft: slideIndex - 1, ArrowRight: slideIndex + 1, Home: 0, End: S.length - 1 };
+  if (!Object.hasOwn(destinations, event.key)) return;
+  event.preventDefault();
+  goTo(destinations[event.key], true);
+});
+
+slideIndex = hashIndex();
+if (presenterMode) {
+  document.body.classList.add('presenter-mode');
+  $('presenterView').hidden = false;
+  $('presenterPrev').addEventListener('click', () => goTo(slideIndex - 1));
+  $('presenterNextButton').addEventListener('click', () => goTo(slideIndex + 1));
+} else {
+  configureDeck();
+}
+render();
+</script>
+</body>
+</html>
