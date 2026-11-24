@@ -207,7 +207,14 @@ body.presenter-mode #presenterView{display:flex;min-height:100vh;flex-direction:
 .resource-links { display:flex; flex-wrap:wrap; gap:14px 25px; margin-top: 18px; }
 .resource-links a { font-size: clamp(18px, 1.6vw, 26px); font-weight: 750; }
 .scenario-panel { width: 100%; }
-.practice-print-button { align-self: flex-start; margin-top: 14px; }
+.agenda-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.agenda-actions a { text-decoration: none; }
+#stage .practice-library { justify-content: flex-start; }
+#libraryPanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: clamp(10px, 1.8vw, 26px); }
+.library-prompt { min-width: 0; padding: 13px 16px; border-top: 3px solid var(--forest); background: #e9e5db; }
+.library-prompt strong { display: block; color: var(--forest); font-size: clamp(17px, 1.55vw, 25px); }
+.library-prompt p { margin: 7px 0 11px; font-size: clamp(16px, 1.4vw, 22px); line-height: 1.35; overflow-wrap: anywhere; }
+.library-prompt button { font-size: clamp(14px, 1.05vw, 19px); padding: 7px 12px; }
 #stage .work-slide { padding-block: clamp(17px, 2.8vh, 36px); }
 #stage .work-slide.capstone { padding-block: clamp(14px, 2.2vh, 27px); }
 #stage .work-slide h2 { font-size: clamp(34px, 4vw, 68px); margin-bottom: clamp(12px, 1.8vh, 20px); }
@@ -364,6 +371,11 @@ body.presenter-mode #presenterView:not([hidden]) { display:flex; }
   #printDeck .practice-print { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10pt 18pt; }
   #printDeck .practice-print h3 { margin: 0 0 5pt; font-size: 13pt; }
   #printDeck .practice-print p { margin-bottom: 4pt; font-size: 11pt; }
+  #printDeck .practice-library h2 { margin-bottom: 8pt; }
+  #printDeck .practice-library .practice-print { gap: 5pt 18pt; }
+  #printDeck .library-prompt { background: transparent; border: 0; padding: 0; margin-bottom: 3pt; }
+  #printDeck .library-prompt strong { font-size: 10pt; }
+  #printDeck .library-prompt p { margin: 2pt 0 0; font-size: 9.5pt; line-height: 1.2; }
   #printDeck .capstone .practice-print { row-gap: 6pt; }
   #printDeck .capstone .practice-print p { font-size: 10.5pt; line-height: 1.2; margin-bottom: 3pt; }
   #printDeck .resource-links a { font-size: 15pt; }
@@ -483,7 +495,7 @@ body.presenter-mode #presenterView:not([hidden]) { display:flex; }
       'Written notice goes to the buyer’s designated contact. Section 6 describes how notice must be sent.',
       'This excerpt omits Section 6 and the contact’s name. A colleague asks whether a text message counts as notice.'
     ],
-    output: 'Two or three questions that would help resolve what the excerpt leaves open.',
+    output: 'Two or three questions for the contract owner, with the most urgent marked.',
     starter: 'What should I ask the contract owner before relying on this excerpt?',
     steps: [
       [3, 'Read the excerpt and mark where it points to information you don’t have.'],
@@ -581,7 +593,7 @@ body.presenter-mode #presenterView:not([hidden]) { display:flex; }
     ],
     output: 'For each request, name the first safe step and who should review the work.',
     steps: [
-      [2, 'On your own, write the first step you would take for each request.'],
+      [2, 'Pick Try, Ask first or Keep out for each request. Write the first step you would take.'],
       [3, 'Compare answers. Identify what you would need permission to use.',
         'Circle the information that needs permission and name who you’d ask.'],
       [3, 'Share one case where a person needs to make the decision.',
@@ -728,7 +740,7 @@ const promptExamples = [
 const S = [];
 let section;
 function slide(end, title, kind, data, notes) {
-  S.push({ section, start: S.at(-1)?.end ?? '8:00', end, title, kind, ...data, notes });
+  S.push({ section, start: end === null ? null : (S.at(-1)?.end ?? '8:00'), end, title, kind, ...data, notes });
 }
 function divider(end, name, lead, notes) {
   section = name;
@@ -762,15 +774,16 @@ section = 'Welcome';
 slide('8:03', 'AI at Reicks', 'cover', {
   lead: 'Practical AI for everyday work',
   sub: 'REICKS VIEW FARMS  ·  SESSION 2  ·  8:00 AM–NOON'
-}, 'Before class, ask Reicks which tool and work accounts people may use. Prepare paper copies from Today’s path and be ready to model the exercises offline with fictional drafts. Close real inboxes and files before projecting. Pair people around available devices. Assign a writer and a checker, then rotate after each round.');
+}, 'Before class, ask Reicks which tool and work accounts people may use. Prepare paper copies from Today’s path and give people a paper route. Set up a shared AI-use board with three headings: Green · Try, Yellow · Ask first, Red · Keep out. Capture ideas in general terms throughout class. Pair people around available devices and rotate who drafts and checks after each round.');
 slide('8:06', 'Today’s path', 'agenda', {
   items: [['8:00', 'Day 1 recap and setup'], ['8:09', 'Optional Gemini tips'], ['8:15', 'Organization and communication'], ['8:50', 'HR and recruitment'], ['9:25', 'Contracts and legal questions'], ['9:50', 'Break'], ['10:00', 'Supply chain'], ['10:27', 'Live production'], ['10:40', 'Management and bookkeeping'], ['11:00', 'Good, Better, Best prompts'], ['11:05', 'Final practice case'], ['11:34', 'Guardrails and Q&A']],
   practiceSheets: true
 }, 'Preview the progression. Before the break, ask for one thing at a time. After the break, check drafts against a source, repair them within limits and show what still needs checking. Explain that everyone can participate with a shared device or on paper. There are 111 minutes of timed participant practice and review.');
-compare('8:09', 'The Day 1 prompt framework',
-  ['What the tool needs', 'Context + Task\nWho is this for? What do you want the tool to do?'],
-  ['What you want back', 'Output + Constraints\nWhat should it look like? What details or limits matter?'],
-  'Ask the room what one thing it needs from meeting notes. Try “List the action items from these notes.” Use a tool Reicks confirms for work or do the exercise on paper. Save prompts with multiple deliverables and several constraints for after the break.');
+slide('8:09', 'The Day 1 prompt framework', 'compare', {
+  left: ['What the tool needs', 'Context + Task\nWho is this for? What do you want the tool to do?'],
+  right: ['What you want back', 'Output + Constraints\nWhat should it look like? What details or limits matter?'],
+  cue: 'Quick challenge. Turn “Help with this meeting” into a one-line request for a specific result.'
+}, 'Give everyone 30 seconds to write a one-line prompt. Hear one or two requests. “List the action items from these notes” is a useful starting point. Use paper or a tool Reicks confirms for work. Point to the shared board where people can leave use ideas and questions.');
 
 divider('8:11', 'Optional Gemini tips', 'A short walkthrough for Google Workspace accounts', 'Introduce this as a look at where Gemini features may be available. Reicks access and approved uses are pending confirmation. Show the links or describe the workflow if no Reicks work demo account has been confirmed. Keep real inboxes and files off the projector.');
 slide('8:15', 'Gemini in the browser, Docs and Gmail', 'list', {
@@ -821,14 +834,14 @@ workRound('9:19', 'A first-day checklist', 'onboarding',
   'At minute four, have pairs put their checklist in a blank document or on paper. Ask learners to format it so the new hire can use it. Point back to slide 5 if the group can use its Docs workflow. At minute ten, trade checklists and identify a detail HR needs to confirm.');
 compare('9:25', 'HR review points',
   ['Working draft', 'A role description, question set or blank onboarding checklist from supplied material.'],
-  ['HR review', 'Confirm requirements and approved wording. Route employee records, applicant information and decisions through HR.'],
+  ['HR review', 'Confirm wording and requirements with HR. Route applicant and employee records through HR. The hiring team evaluates candidates and makes hiring decisions.'],
   'Ask which confirmed detail makes the checklist usable right away and which missing detail would cause confusion on the first day. Close by naming who would verify the missing information.');
 
 divider('9:28', 'Contracts and legal questions', 'Compare exact wording and prepare questions for the reviewer.', 'Use short fictional clauses. Show how the comparison gives the contract owner or counsel specific questions to resolve.');
 demo('9:33', 'Two versions of a clause', 'Live demo 3 · fictional wording',
   'What wording was added in Version B?\nA: “Buyer will send notice by email.”\nB: “Buyer will send notice by email and post.”',
-  'Check the exact wording, including which delivery method was added.',
-  'Model one narrow comparison. The answer is “and post.” Point out that one clear change can surface another question, such as which mailing address to use. In the next round, learners write questions for the owner based on a different excerpt and missing information.',
+  'Quote the exact words that changed. Point to the version that contains them.',
+  'Have learners say or underline “and post” in Version B. End the demo once everyone has located the exact change. Introduce the next round as preparing questions from one excerpt with missing information.',
   'Version B adds “and post” after “email.”');
 workRound('9:45', 'Questions for the contract owner', 'contracts',
   'At minute three, ask pairs to draft questions tied to the excerpt. At minute eight, exchange questions and ask which should go to the owner first. Leave the text-message question for the contract owner or counsel.');
@@ -872,21 +885,21 @@ demo('10:31', 'What did the crew actually observe?', 'Fictional production examp
   'The crew reported the latch didn’t catch on the first try at 6:20 AM and notified the lead at 6:25 AM. The draft’s claim that it was fixed at 6:25 AM has no support. Repair status is open.');
 workRound('10:39', 'Map a live production handoff', 'production',
   'Give pairs eight minutes. Sketch on paper or use a blank canvas and an approved tool to draft box labels. At minute five, trade diagrams. Ask someone to trace both paths and then show the sample in the review key.');
-check('10:40', 'Who can confirm equipment status?', 'The incoming shift asks whether the cart is ready. Where should they check?',
-  ['The observation log.', 'The draft handoff.', 'The shift lead or assigned reviewer.'],
-  'The shift lead or assigned reviewer checks status through the normal procedure. The observation log records the stops and who was told.',
-  'Ask one pair to name who can confirm equipment status before the incoming crew relies on it.');
+check('10:40', 'Which path applies now?', 'The shift lead confirms the cart will stay out of service for the rest of this shift. What goes in the handoff?',
+  ['Status is still pending until the cause is known.', 'The cart stays out of service for the rest of this shift.', 'The cart will be back in service next shift.'],
+  'Follow Yes. Record the shift lead’s update and keep its time limit. The next shift’s status is still open.',
+  'Ask one pair to point to the Yes path on its diagram and read the confirmed update. Ask what can be said about the next shift’s status.');
 
 divider('10:41', 'Management and bookkeeping', 'Choose a decision brief or an invoice check. Both need a reviewable source.', 'Give each role its own task. Managers compare options and identify who confirms staffing. Bookkeeping participants check invoice status and show how they arrived at a total. Invite others to pick the more familiar task.');
-demo('10:44', 'The missing schedule check', 'Management example',
-  'Source: Training needs one 60-minute block or two 30-minute blocks. Tuesday has 30 minutes. Wednesday’s availability is unconfirmed.\nDraft: “Book one hour Tuesday.”\n1. Point to the fact that conflicts with the draft.\n2. Write one question for the schedule owner that would help decide what to do.',
-  'Keep the decision open until the schedule owner verifies coverage.',
-  'Use the prompt to model a narrow source check. Ask which scheduling detail needs a human answer. The management round uses different source notes to build a full decision brief.',
-  'Tuesday has 30 minutes, so a one-hour Tuesday booking conflicts with the schedule. Is there a 60-minute opening Wednesday or a second 30-minute slot?');
-check('10:46', 'Which invoices count?', 'Which amount belongs outside the approved total?',
-  ['Approved amounts are $110, $70 and $190.', 'Another $40 is pending.'],
-  'The $40 is pending. Verify each entry’s status before entering it in an approved total.',
-  'Ask the room to identify the pending line. In the bookkeeping round, learners will also have to spot a duplicate and verify the arithmetic.');
+demo('10:44', 'Evidence for a purchase request', 'Management example',
+  'The quote for replacing a label printer is $240. The current printer works. The team expects to save time but hasn’t measured delays.\n1. Separate the quoted cost from the expected benefit.\n2. Ask for one measurement the manager could use to weigh the purchase.',
+  'Ask what information would help the manager judge the expected savings.',
+  'Ask the room for one measurement, then reveal the sample. Point out the difference between a known cost and a benefit that still needs evidence. The practice round asks managers to compare two options against a staffing constraint.',
+  'The replacement is quoted at $240. The time savings are open. How many minutes did the team lose to printer delays last week?');
+check('10:46', 'Which source confirms approval?', 'The invoice register records approvals in this case. What status should you use today?',
+  ['Invoice register: $40 pending.', 'Email: “I expect the $40 invoice to be approved this afternoon.”'],
+  'Use Pending from the register. Once approval is recorded, verify the updated status before including the amount.',
+  'Ask which source supports the status today and what would change it. In the practice round, bookkeepers use recorded statuses, flag a duplicate and verify the total.');
 slide('10:58', 'Choose your practice task', 'choice-round', {
   choices: [rounds.management, rounds.bookkeeping]
 }, 'Ask pairs to pick Management or Bookkeeping. Read for three minutes, draft for five and peer review for four. Managers compare two options using the inventory count schedule. Bookkeepers check both approval status and duplicates before calculating the total. The two tasks run in parallel. Use the matching printed sheet when working on paper.');
@@ -917,7 +930,7 @@ slide('11:34', 'Pair debrief', 'question', {
 
 divider('11:36', 'Guardrails and Q&A', 'Check what you can use, what you can share and who reviews the result.', 'Frame these as working questions for Reicks. Record questions about tools, data and review for the people who can answer them. The final eight minutes are reserved for questions.');
 workRound('11:44', 'Three requests before you paste', 'guardrails',
-  'Start the timer. Give participants two minutes to think individually, three to compare answers, then three to share. Capture questions about Reicks data rules for the appropriate owner. Read the review key after hearing the room.');
+  'Start the timer. Give participants two minutes to think individually, three to compare, then three to share. Ask which requests fit Try, Ask first or Keep out and record the reasons. Read the review key after hearing the room. Capture open Reicks policy questions on the shared board.');
 compare('11:48', 'Before a draft goes out',
   ['Check the source', 'Verify names, dates, numbers and commitments against the source. Flag any remaining assumptions.'],
   ['Check who owns the decision', 'Ask the person responsible for the work to confirm anything that affects people, money, safety or operations.'],
@@ -926,11 +939,53 @@ slide('11:52', 'One task for next week', 'question', {
   text: 'Where could AI help with a first draft?',
   sub: 'Name the task, the information you can use and who will check the result.'
 }, 'Give participants a minute to write their own example. Invite two people to share. Capture open questions about access, information, review or ownership for the relevant Reicks team.');
-list('12:00', 'Questions to take back to Reicks', [
-  'Which tools and accounts are approved for work?',
-  'What work information can we use with them?',
-  'Who reviews outputs before we share them or act?'
-], 'Take questions from the room for the full eight minutes. Capture any unresolved question with an owner and a next step. Note the one task participants want to try once access and use are confirmed.');
+slide('12:00', 'Questions to take back to Reicks', 'list', {
+  items: [
+    'Which tools and accounts are approved for work?',
+    'What work information can we use with them?',
+    'Who reviews outputs before we share them or act?'
+  ],
+  cue: 'Log ideas on the board under Green · Try, Yellow · Ask first, or Red · Keep out. Give each open question an owner.'
+}, 'Take questions for the full eight minutes. Review the shared board and capture one next step and an owner for each unresolved question, when known. Save the group’s general use ideas and questions for Reicks leadership and HR. Close the scheduled workshop at noon.');
+
+section = 'After class';
+slide(null, 'More practice by role', 'practice-library', {
+  groups: [
+    ['Organization', [
+      ['Pull key points from a long email', 'Summarize this email in three bullets for the office team. The printer service moved to Thursday at 2 PM. Use the front printer meanwhile. Supply orders stay on Friday. The service contact will confirm how long the visit will take.'],
+      ['Turn rough notes into an agenda', 'Make a 20-minute meeting agenda from these notes: review the delivery calendar, assign the inventory count lead, and agree who updates the office team.'],
+      ['Adapt a message for three audiences', 'An open house starts Saturday at 9 AM at the west gate. Parking is pending. Draft a short update for employees, managers and the outside event vendor using the same facts.']
+    ]],
+    ['HR', [
+      ['Turn a handbook excerpt into an FAQ', 'Create two questions and answers from this fictional handbook note. New hires collect a badge from the office. They bring the badge to orientation. HR will confirm orientation room assignments.'],
+      ['Write manager talking points', 'Draft three talking points for a manager to share with employees. Tuesday’s orientation moved to 10 AM in Room B. Bring the same materials. The facilitator stays the same.']
+    ]],
+    ['Contracts', [
+      ['Summarize a clause in plain language', 'Summarize this fictional clause in one plain-language sentence: “The buyer shall notify the designated contact in writing two business days before rescheduling.” Keep the timing, written notice and recipient. Check the summary against the clause and route interpretation to the contract owner.']
+    ]],
+    ['Supply chain', [
+      ['Plan work with dependencies', 'Build a work plan for a Friday 2 PM pickup. Count boxes before printing labels or sending the carrier the total. Clear a space and print labels before staging. Show what can happen in parallel and flag any missing owner.']
+    ]],
+    ['Live production', [
+      ['Prepare for a maintenance call', 'In a fictional report, a display went blank twice near staging. Make a list of observations to collect before calling maintenance. Mark unknown details as open. Keep the task to preparing the report.'],
+      ['Turn a supplied procedure into a checklist', 'Convert this approved reporting procedure for a fictional site into a checklist. Log the date and time, copy the displayed code, notify the shift lead, then record who acknowledged the report. Preserve the steps and their order.']
+    ]],
+    ['Management', [
+      ['Compare approaches and risks', 'A team wants fewer surprise supply shortages and already has a paper log and a shared sheet. Ask what information is missing, then outline three ways to improve tracking. Give one tradeoff and one risk for each.'],
+      ['Turn a report into questions', 'A fictional weekly report says five shipments were late and lists no causes. Give three questions a manager should ask before proposing a change.']
+    ]],
+    ['Bookkeeping', [
+      ['Build and explain a formula', 'In a fictional sheet, amounts are in B2:B4 and approval status is in C2:C4. The rows are $120 Approved, $80 Pending and $210 Approved, with no duplicates. Give a formula to total only Approved rows. Explain how it works and show the expected result.']
+    ]]
+  ]
+}, 'Offer these fictional examples as take-home practice or as a reference when someone asks about a specific workflow. Ask participants to compare each output with its source and name the person who would review it.');
+
+slide(null, 'Make a short video with Veo', 'demo', {
+  label: 'Bonus · one playful scene',
+  prompt: 'Make an 8-second stop-motion clip. A tiny clay pig in yellow rain boots hops over one puddle beside a red toy barn. Use a low camera and soft morning light. Add one splash and quiet birds. Keep the same pig and boots throughout. No text or logos.',
+  cue: 'If Reicks confirms Flow access, start a project, choose Video and Veo 3.1 Lite, and generate one clip. Watch it and pick one thing to change.',
+  links: [['Open Google Flow', 'https://flow.google.com/'], ['Google Flow video help', 'https://support.google.com/flow/answer/16353334?hl=en']]
+}, 'Offer this as a 5–8 minute bonus after class. Check that Reicks has approved Flow on the demo account and that credits are available. In Flow, select Video, Veo 3.1 Lite, 8 seconds and one output. Read the prompt aloud and generate the clip. Check the action, continuity and sound. Ask the room to change one detail for a second attempt if time and credits allow. Without Flow access, have pairs sketch the first and last frames and revise the prompt. Use the fictional scene and text only.');
 
 
 const $ = id => document.getElementById(id);
@@ -955,7 +1010,7 @@ function esc(text) {
   return String(text).replace(/[&<>"']/g, char => entities[char]);
 }
 const lines = text => esc(text).replace(/\n/g, '<br>');
-const range = s => s.start + '–' + s.end;
+const range = s => s.end === null ? 'Optional' : s.start + '–' + s.end;
 const pointList = items => '<ul class="point-list">' +
   items.map(item => '<li>' + esc(item) + '</li>').join('') + '</ul>';
 const links = items => '<div class="resource-links">' + items.map(
@@ -1096,6 +1151,12 @@ function printExample(s, example) {
     ).join('') + '</div></section>';
 }
 
+function practicePrompts(prompts, forPrint) {
+  return prompts.map(([title, prompt], index) => '<div class="library-prompt"><strong>' + esc(title) + '</strong>' +
+    paragraph('', prompt) + (forPrint ? '' : '<button type="button" class="chip-button" data-copy-library="' + index +
+      '" aria-label="Copy prompt: ' + esc(title) + '">Copy prompt</button>') + '</div>').join('');
+}
+
 function slideMarkup(s, forPrint = false) {
   const label = paragraph('chapter-label', s.kind === 'cover' ? 'Session 2' : s.section);
   let className = 'slide';
@@ -1112,10 +1173,14 @@ function slideMarkup(s, forPrint = false) {
       body = label + heading(s.title) + '<div class="agenda">' + s.items.map(
         ([time, item]) => '<div class="agenda-item"><b>' + esc(time) + '</b><span>' + esc(item) + '</span></div>'
       ).join('') + '</div>' +
-        (s.practiceSheets && !forPrint ? '<button type="button" class="chip-button practice-print-button" data-print-practice>Print practice sheets</button>' : '');
+        (s.practiceSheets && !forPrint ? '<div class="agenda-actions">' +
+          '<button type="button" class="chip-button" data-print-practice>Print practice sheets</button>' +
+          S.flatMap((extra, index) => extra.end === null ? '<a href="#slide=' + (index + 1) + '" class="chip-button">' +
+            esc(extra.title) + '</a>' : []).join('') + '</div>' : '');
       break;
     case 'compare':
-      body = label + heading(s.title) + '<div class="two-col">' + column(s.left) + column(s.right) + '</div>';
+      body = label + heading(s.title) + '<div class="two-col">' + column(s.left) + column(s.right) + '</div>' +
+        (s.cue ? paragraph('prompt-caption', s.cue) : '');
       break;
     case 'list':
       body = label + heading(s.title) + pointList(s.items) + (s.cue ? paragraph('prompt-caption', s.cue) : '') +
@@ -1128,7 +1193,20 @@ function slideMarkup(s, forPrint = false) {
         promptSurface(s.prompt) + '<div class="prompt-actions">' + copyButton +
         (s.sampleInput ? '<button class="chip-button" type="button" data-copy="with-input">Copy with ' +
           esc(s.sampleInput.label) + '</button>' : '') +
-        '</div></div>' + paragraph('prompt-caption', s.cue) + demoSamples(s, forPrint);
+        '</div></div>' + paragraph('prompt-caption', s.cue) + (s.sampleResult ? demoSamples(s, forPrint) : '') +
+        (s.links ? links(s.links) : '');
+      break;
+    case 'practice-library':
+      className += ' practice-library';
+      body = label + heading(s.title);
+      if (forPrint) {
+        body += '<div class="practice-print">' + s.groups.map(([group, prompts]) =>
+          '<section><h3>' + esc(group) + '</h3>' + practicePrompts(prompts, true) + '</section>').join('') + '</div>';
+      } else {
+        body += choiceButtons(s.groups.map(([group]) => group), selectedCase(s), 'library', 'libraryPanel',
+          'Choose a work area', 'case-buttons') +
+          '<div id="libraryPanel">' + practicePrompts(s.groups[selectedCase(s)][1], false) + '</div>';
+      }
       break;
     case 'prompt-examples':
       className += ' prompt-example';
@@ -1376,6 +1454,22 @@ function configureDeck() {
       const s = S[slideIndex];
       const prompt = copy.dataset.copy === 'with-input' ? s.prompt + '\n\n' + s.sampleInput.text : s.prompt;
       void copyText(copy, prompt, 'Prompt');
+      return;
+    }
+    const library = event.target.closest('[data-library]');
+    if (library) {
+      const s = S[slideIndex];
+      const group = Number(library.dataset.library);
+      selectedCases.set(s, group);
+      activateChoice(library, '[data-library]');
+      $('libraryPanel').innerHTML = practicePrompts(s.groups[group][1], false);
+      return;
+    }
+    const copyLibrary = event.target.closest('[data-copy-library]');
+    if (copyLibrary) {
+      const s = S[slideIndex];
+      const [, prompt] = s.groups[selectedCase(s)][1][Number(copyLibrary.dataset.copyLibrary)];
+      void copyText(copyLibrary, prompt, 'Prompt');
       return;
     }
     const exampleButton = event.target.closest('[data-example]');
